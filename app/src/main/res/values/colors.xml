@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="color_Priamry">#FC0000</color>
+    <color name="color_Search">#F8DD6F</color>
+    <color name="color_Background">#FEFBF0</color>
+    <color name="color_PopUpBacground">#F8F2DE</color>
+    <color name="color_UnselectedButton">#FFFFFF</color>
+
+
 </resources>
