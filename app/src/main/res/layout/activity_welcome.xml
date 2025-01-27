@@ -5,15 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashScreen">
-    
-    <View
-        android:id="@+id/splashGradient"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/gradient"
-        android:alpha="0.8"
-        />
+    tools:context=".SplashScreen"
+    android:background="@color/color_Background">
 
     <ImageView
         android:id="@+id/logoSplash"
@@ -24,25 +17,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         />
 
-    <TextView
-        android:id="@+id/splashAppName"
+    <Button
+        android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Niam Niam"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/logoSplash"
-        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="@id/logoSplash"
+        app:layout_constraintStart_toStartOf="@id/logoSplash"
+        app:layout_constraintTop_toBottomOf="@+id/logoSplash"
         android:layout_marginTop="10dp"
-        android:fontFamily="@font/quicksand_bold"
-
+        android:text="Log in"
+        android:backgroundTint="@color/color_Priamry"
         />
 
-
-
-
-
-
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/loginButton"
+        app:layout_constraintStart_toStartOf="@id/loginButton"
+        app:layout_constraintTop_toBottomOf="@+id/loginButton"
+        android:text="Dont have an account? Sign up"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
