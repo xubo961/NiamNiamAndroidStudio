@@ -63,7 +63,7 @@
         app:layout_constraintTop_toBottomOf="@+id/loginButton"
         android:text="Dont have an account? Sign up"
         android:textColor="@color/colorText"
-
+        android:onClick="onLoginClick"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
