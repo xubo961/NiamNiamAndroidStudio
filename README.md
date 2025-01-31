@@ -1,4 +1,10 @@
 <h1 style="text-align: center;">Niam Niam App</h1> 
+<h3>PROTOTIPO EN FIGMA:</h3>
+https://embed.figma.com/design/CfNlXfB2WjnTfdeAmlrpSI/EPSUM-DAM2-PROYECTO?node-id=0-1&embed-host=share
+
+<h3>MODELO ENTIDAD RELACIÓN:</h3>
+https://drive.google.com/file/d/1HbmnnFMj7iYh7guorWqGQxK-41E3-3Td/view?usp=sharing
+<hr>
   <p style="text-align: center;">Nuestra app está dirigida a personas que no son muy hábiles a la hora de planear sus comidas. Con esta herramienta, los usuarios podrán filtrar las recetas a partir de los ingredientes que tengan en casa, haciendo que la búsqueda sea más rápida y eficiente.</p> 
 <h3>Diseño</h3> 
 <hr> 
@@ -20,3 +26,4 @@
   <p><strong>Historia:</strong> Como usuario de la aplicación "Niam Niam", quiero poder buscar recetas dependiendo de los ingredientes que tengo en casa para preparar diferentes platos sin necesidad de ir al supermercado.</p> 
 <h4>Criterios de aceptación:</h4> 
   <ul> <li>El usuario puede ingresar los ingredientes con los que cuenta.</li> <li>La aplicación muestra una lista de recetas que se pueden hacer con esos ingredientes.</li> <li>Todas las recetas incluyen instrucciones detalladas paso a paso.</li> <li>El usuario puede guardar las recetas que le gustan para consultarlas más tarde.</li> </ul>
+
