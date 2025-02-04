@@ -16,9 +16,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
+            android:paddingTop="25dp"
             android:text="Bienvenido, Name"
-            android:textSize="30dp"
-            android:paddingTop="25dp"/>
+            android:textSize="30dp" />
 
         <HorizontalScrollView
             android:layout_width="match_parent"
@@ -37,9 +37,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="7dp"
                     android:text="Principales"
-                    android:textSize="20dp"
                     android:textColor="@color/bottom_nav_color"
-                    />
+                    android:textSize="20dp" />
 
                 <TextView
                     android:id="@+id/guarniciones"
@@ -102,28 +101,17 @@
                 android:text="Buscar" />
         </LinearLayout>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            tools:listitem="@layout/rv_fodd_card" />
+
 
     </LinearLayout>
 
 </FrameLayout>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     <!--                <Button-->
