@@ -1,4 +1,4 @@
-package com.xubop961.niamniamapp.fr;
+package com.xubop961.niamniamapp.fragments;
 
 import android.os.Bundle;
 
@@ -12,10 +12,10 @@ import com.xubop961.niamniamapp.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Add#newInstance} factory method to
+ * Use the {@link HomePage#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Add extends Fragment {
+public class HomePage extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class Add extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Add() {
+    public HomePage() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class Add extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Add.
+     * @return A new instance of fragment HomePage.
      */
     // TODO: Rename and change types and number of parameters
-    public static Add newInstance(String param1, String param2) {
-        Add fragment = new Add();
+    public static HomePage newInstance(String param1, String param2) {
+        HomePage fragment = new HomePage();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class Add extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add, container, false);
+        return inflater.inflate(R.layout.fragment_home_page, container, false);
     }
 }
