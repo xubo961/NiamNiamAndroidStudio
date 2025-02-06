@@ -49,5 +49,9 @@
         <li>El usuario puede guardar las recetas que le gustan para consultarlas más tarde.</li>
     </ul>
 
+<img src="https://camo.githubusercontent.com/8b907197a77cc74c16df4331d30262ed69a1876d53f55b0cdbbb42ac841b258f/68747470733a2f2f70726f66696c652d636f756e7465722e676c697463682e6d652f6d636173322f636f756e742e7376673f" alt="Descripción de la imagen">
+
+    
+
 </body>
 </html>
