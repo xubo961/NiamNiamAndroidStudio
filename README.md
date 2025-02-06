@@ -5,9 +5,6 @@
   <h3>PROTOTIPO EN FIGMA:</h3>
     <p><a href="https://embed.figma.com/design/CfNlXfB2WjnTfdeAmlrpSI/EPSUM-DAM2-PROYECTO?node-id=0-1&embed-host=share" target="_blank">Prototipo en Figma</a></p>
 
-  <h3>MODELO ENTIDAD RELACIÓN:</h3>
-    <p><a href="https://drive.google.com/file/d/1HbmnnFMj7iYh7guorWqGQxK-41E3-3Td/view?usp=sharing" target="_blank">Modelo Entidad Relación</a></p>
-
   <hr>
 
   <p style="text-align: center;">Nuestra app está dirigida a personas que no son muy hábiles a la hora de planear sus comidas. Con esta herramienta, los usuarios podrán filtrar las recetas a partir de los ingredientes que tengan en casa, haciendo que la búsqueda sea más rápida y eficiente. 🍳🥘</p>
