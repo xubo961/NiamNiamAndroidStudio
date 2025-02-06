@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "com.xubop961.niamniamapp"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.xubop961.niamniamapp"

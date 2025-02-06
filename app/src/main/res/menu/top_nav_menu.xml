@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/configuracionButton"
+        android:title="Configuración"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/acercadeButton"
+        android:title="Acerca de"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/cerrarSeionButton"
+        android:title="Cerrar sesión"
+        app:showAsAction="never"
+        />
+</menu>
