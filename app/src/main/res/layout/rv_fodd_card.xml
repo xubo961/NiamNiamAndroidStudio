@@ -14,7 +14,7 @@
         android:padding="8dp">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imageFood"
+            android:id="@+id/foodImage"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="center"
@@ -23,7 +23,7 @@
             app:shapeAppearanceOverlay="@style/roundedImageView" />
 
         <TextView
-            android:id="@+id/coctailNombre"
+            android:id="@+id/foodName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
