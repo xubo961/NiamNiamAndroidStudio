@@ -23,15 +23,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Set up the toolbar
         Toolbar toolbar = findViewById(R.id.top_toolbar);
         setSupportActionBar(toolbar);
 
-        // Set up bottom navigation
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(navListener);
 
-        // Set default fragment
         if (savedInstanceState == null) {
             bottomNavigationView.setSelectedItemId(R.id.home);
         }
@@ -60,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu for the toolbar
         getMenuInflater().inflate(R.menu.top_nav_menu, menu);
         return true;
     }

@@ -40,6 +40,12 @@
         />
 
     <ImageView
+        android:id="@+id/splashGlideBakcground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+    <ImageView
         android:id="@+id/logoSplash"
         android:layout_width="300dp"
         android:layout_height="300dp"
@@ -61,13 +67,7 @@
         android:layout_marginTop="10dp"
         android:fontFamily="@font/quickstan_light"
         android:textColor="@color/colorText"
+        android:textStyle="bold"
 
         />
-
-
-
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

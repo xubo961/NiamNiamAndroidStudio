@@ -108,7 +108,6 @@
             android:padding="16dp"
             tools:listitem="@layout/rv_fodd_card" />
 
-
     </LinearLayout>
 
 </FrameLayout>
