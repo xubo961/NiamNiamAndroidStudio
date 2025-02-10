@@ -24,32 +24,28 @@
 
 
         <LinearLayout
+            android:id="@+id/linearlayoutSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_margin="16dp"
             android:gravity="center"
-            android:orientation="horizontal"
->
+            android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/buscarRecetas"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
                 android:background="@drawable/rounded_edittext_background"
-                android:drawableLeft="@drawable/baseline_search_24"
-                android:hint="Buscar recetas..."
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
+                android:drawableStart="@drawable/baseline_search_24"
+                android:drawablePadding="10dp"
                 android:fontFamily="@font/quicksand_light"
-                android:textStyle="bold"/>
+                android:hint="Search..."
+                android:paddingStart="40dp"
+                android:textSize="16sp"
+                android:gravity="center_vertical"
+                android:singleLine="true" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Buscar"
-                android:fontFamily="@font/quicksand_light"
-                android:textStyle="bold"/>
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
