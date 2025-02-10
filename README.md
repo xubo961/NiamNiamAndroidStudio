@@ -49,5 +49,13 @@
         <li>El usuario puede guardar las recetas que le gustan para consultarlas más tarde.</li>
     </ul>
 
+<div align="center">
+  <img src="https://profile-counter.glitch.me/xubo961/count.svg?"  />
+</div>
+
+<p align="center"> <img src="https://komarev.com/ghpvc/?username=xubo961&label=Profile%20views&color=0e75b6&style=flat" alt="xubo961" /> </p>
+
+    
+
 </body>
 </html>
