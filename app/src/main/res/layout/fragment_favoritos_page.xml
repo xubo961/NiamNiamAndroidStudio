@@ -18,7 +18,9 @@
             android:gravity="center_horizontal"
             android:paddingTop="25dp"
             android:text="FAVORITOS"
-            android:textSize="30dp" />
+            android:textSize="30dp"
+            android:fontFamily="@font/quicksand_light"
+            android:textStyle="bold"/>
 
 
         <LinearLayout
@@ -37,13 +39,17 @@
                 android:drawableLeft="@drawable/baseline_search_24"
                 android:hint="Buscar recetas..."
                 android:paddingLeft="16dp"
-                android:paddingRight="16dp" />
+                android:paddingRight="16dp"
+                android:fontFamily="@font/quicksand_light"
+                android:textStyle="bold"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Buscar" />
+                android:text="Buscar"
+                android:fontFamily="@font/quicksand_light"
+                android:textStyle="bold"/>
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView

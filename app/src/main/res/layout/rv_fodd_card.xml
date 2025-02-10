@@ -1,12 +1,11 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="8dp"
+    app:cardBackgroundColor="@color/color_Background"
     app:cardCornerRadius="8dp"
-    app:cardElevation="4dp"
-    app:cardBackgroundColor="@color/color_PopUpBacground"
-    >
+    app:cardElevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,19 +13,24 @@
         android:orientation="vertical"
         android:padding="8dp">
 
-        <ImageView
-            android:id="@+id/coctailImagen"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageFood"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
             android:scaleType="centerCrop"
-            android:src="@drawable/logoniamniam"/>
+            android:src="@drawable/coche"
+            app:shapeAppearanceOverlay="@style/roundedImageView" />
 
         <TextView
             android:id="@+id/coctailNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/quicksand_light"
             android:gravity="center"
+            android:textColor="@color/colorText"
             android:textSize="16sp"
-            android:textColor="@android:color/black" />
+            android:textStyle="bold" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
