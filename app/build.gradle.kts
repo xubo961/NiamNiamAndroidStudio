@@ -33,6 +33,10 @@ android {
 
 dependencies {
 
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
+    implementation(libs.retrofit.v2110)
+    implementation (libs.converter.gson.v2110)
     implementation ("com.google.android.material:material:1.6.0")
     implementation(libs.glide)
     implementation(libs.appcompat)

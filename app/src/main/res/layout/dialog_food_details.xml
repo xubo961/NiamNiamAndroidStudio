@@ -1,0 +1,42 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/dialogFoodImage"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        android:contentDescription="Imagen de la comida" />
+
+    <TextView
+        android:id="@+id/dialogFoodName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:text="Nombre de la comida" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fillViewport="true">
+
+        <TextView
+            android:id="@+id/dialogFoodInstruction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:fontFamily="@font/quicksand_light"
+            android:textStyle="bold"
+            android:textColor="@color/colorText"
+            android:padding="8dp" />
+    </ScrollView>
+
+</LinearLayout>

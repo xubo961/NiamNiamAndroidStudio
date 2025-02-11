@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -104,14 +103,25 @@
                 android:drawableStart="@drawable/baseline_search_24"
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/quicksand_light"
-                android:hint="Search..."
+                android:hint="Buscar..."
                 android:paddingStart="40dp"
                 android:textSize="16sp"
                 android:gravity="center_vertical"
                 android:singleLine="true" />
 
+            <Button
+                android:id="@+id/btnBuscar"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="Buscar"
+                android:textSize="16sp"
+                android:textColor="@color/colorText"
+                android:backgroundTint="@color/colorButtonAdd"
+                android:layout_marginStart="8dp"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/quicksand_light"
+                android:textStyle="bold"/>
         </LinearLayout>
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"

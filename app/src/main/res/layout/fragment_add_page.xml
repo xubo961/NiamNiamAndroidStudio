@@ -7,141 +7,196 @@
     android:background="@color/color_Background"
     tools:context=".fragments.HomePage">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:padding="16dp">
 
-        <TextView
-            android:id="@+id/textAddFood"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/quicksand_light"
-            android:gravity="center_horizontal"
-            android:paddingTop="25dp"
-            android:text="AÑADIR RECETA"
-            android:textAlignment="center"
-            android:textColor="@color/colorText"
-            android:textSize="30dp"
-            android:textStyle="bold" />
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            app:cardBackgroundColor="@color/color_PopUpBacground"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp">
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/textAddFood"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:fontFamily="@font/quicksand_light"
+                android:gravity="center_horizontal"
+                android:paddingTop="25dp"
+                android:text="AÑADIR RECETA"
+                android:textAlignment="center"
+                android:textColor="@color/colorText"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nombre de la Receta"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorText"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/quicksand_light"
-                    android:textStyle="bold"/>
-
-                <EditText
-                    android:id="@+id/textRecetaName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Escribe el nombre de la receta"
-                    android:inputType="textCapWords"
-                    android:textColorHint="@color/colorHint" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            app:cardBackgroundColor="@color/color_PopUpBacground"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp">
-
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                app:cardBackgroundColor="@color/color_PopUpBacground"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ingredientes"
-                    android:textColor="@color/colorText"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/quicksand_light"
-                    android:textStyle="bold"/>
-
-                <EditText
-                    android:id="@+id/textIngredientes"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Escribe los ingredientes"
-                    android:inputType="textMultiLine"
-                    android:minLines="3"
-                    android:textColorHint="@color/colorHint" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            app:cardBackgroundColor="@color/color_PopUpBacground"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/quicksand_light"
+                        android:text="Imagen de la Receta"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorText"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-            <LinearLayout
+                    <ImageView
+                        android:id="@+id/selectImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:contentDescription="Imagen de la receta"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/coche" />
+
+                    <Button
+                        android:id="@+id/btnSelectImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/colorButtonAdd"
+                        android:fontFamily="@font/quicksand_light"
+                        android:text="Seleccionar Imagen"
+                        android:textColor="@color/colorText"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:cornerRadius="8dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                app:cardBackgroundColor="@color/color_PopUpBacground"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Instrucciones"
-                    android:textColor="@color/colorText"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/quicksand_light"
-                    android:textStyle="bold"/>
-
-                <EditText
-                    android:id="@+id/tetxInstrucciones"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Escribe las instrucciones"
-                    android:inputType="textMultiLine"
-                    android:minLines="6"
-                    android:textColorHint="@color/colorHint" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-        <Button
-            android:id="@+id/btnGuardarReceta"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="@color/colorButtonAdd"
-            android:fontFamily="@font/quicksand_light"
-            android:text="Guardar Receta"
-            android:textColor="@color/colorText"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:cornerRadius="8dp" />
-    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/quicksand_light"
+                        android:text="Nombre de la Receta"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorText"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/textRecetaName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Escribe el nombre de la receta"
+                        android:inputType="textCapWords"
+                        android:textColorHint="@color/colorHint" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                app:cardBackgroundColor="@color/color_PopUpBacground"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/quicksand_light"
+                        android:text="Ingredientes"
+                        android:textColor="@color/colorText"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/textIngredientes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Escribe los ingredientes"
+                        android:inputType="textMultiLine"
+                        android:minLines="3"
+                        android:textColorHint="@color/colorHint" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                app:cardBackgroundColor="@color/color_PopUpBacground"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/quicksand_light"
+                        android:text="Instrucciones"
+                        android:textColor="@color/colorText"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/tetxInstrucciones"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Escribe las instrucciones"
+                        android:inputType="textMultiLine"
+                        android:minLines="6"
+                        android:textColorHint="@color/colorHint" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/btnGuardarReceta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="@color/colorButtonAdd"
+                android:fontFamily="@font/quicksand_light"
+                android:text="Guardar Receta"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:cornerRadius="8dp" />
+        </LinearLayout>
+    </ScrollView>
 </FrameLayout>
