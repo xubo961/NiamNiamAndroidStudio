@@ -9,8 +9,8 @@
     <color name="colorButtonAdd">#FFF081</color>
     <color name="white">#FFFFFF</color>
     <color name="grey">#B1B1B1</color>
-    <color name="colorCardBackground">#FFFFFF</color> <!-- Fondo de las tarjetas -->
-    <color name="colorHint">#808080</color> <!-- Color del hint -->
+    <color name="colorCardBackground">#FFFFFF</color>
+    <color name="colorHint">#808080</color>
 
 
 
