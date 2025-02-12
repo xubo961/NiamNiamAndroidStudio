@@ -54,7 +54,9 @@
                         android:textAlignment="center"
                         android:textColor="@color/colorText"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:background="@color/colorButtonAdd"
+                        android:layout_gravity="center"/>
 
                     <ImageView
                         android:id="@+id/selectImage"
@@ -103,7 +105,9 @@
                         android:textAlignment="center"
                         android:textColor="@color/colorText"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:background="@color/colorButtonAdd"
+                        android:layout_gravity="center"/>
 
                     <EditText
                         android:id="@+id/textRecetaName"
@@ -111,7 +115,8 @@
                         android:layout_height="wrap_content"
                         android:hint="Escribe el nombre de la receta"
                         android:inputType="textCapWords"
-                        android:textColorHint="@color/colorHint" />
+                        android:textColorHint="@color/colorHint"
+                        android:background="@color/colorPopUpBackgroundSubNivel"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -137,7 +142,9 @@
                         android:text="Ingredientes"
                         android:textColor="@color/colorText"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:background="@color/colorButtonAdd"
+                        android:layout_gravity="center"/>
 
                     <EditText
                         android:id="@+id/textIngredientes"
@@ -146,7 +153,8 @@
                         android:hint="Escribe los ingredientes"
                         android:inputType="textMultiLine"
                         android:minLines="3"
-                        android:textColorHint="@color/colorHint" />
+                        android:textColorHint="@color/colorHint"
+                        android:background="@color/colorPopUpBackgroundSubNivel"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -172,7 +180,9 @@
                         android:text="Instrucciones"
                         android:textColor="@color/colorText"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:background="@color/colorButtonAdd"
+                        android:layout_gravity="center"/>
 
                     <EditText
                         android:id="@+id/tetxInstrucciones"
@@ -181,7 +191,8 @@
                         android:hint="Escribe las instrucciones"
                         android:inputType="textMultiLine"
                         android:minLines="6"
-                        android:textColorHint="@color/colorHint" />
+                        android:textColorHint="@color/colorHint"
+                        android:background="@color/colorPopUpBackgroundSubNivel"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -192,7 +203,7 @@
                 android:layout_marginTop="24dp"
                 android:backgroundTint="@color/colorButtonAdd"
                 android:fontFamily="@font/quicksand_light"
-                android:text="Guardar Receta"
+                android:text="Guardar"
                 android:textColor="@color/colorText"
                 android:textSize="18sp"
                 android:textStyle="bold"

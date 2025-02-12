@@ -20,7 +20,9 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:gravity="center"
-        android:text="Nombre de la comida" />
+        android:text="Nombre de la comida"
+        android:fontFamily="@font/quicksand_light"
+        />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -36,7 +38,8 @@
             android:fontFamily="@font/quicksand_light"
             android:textStyle="bold"
             android:textColor="@color/colorText"
-            android:padding="8dp" />
+            android:padding="8dp"
+            android:text="Instrucciones" />
     </ScrollView>
 
 </LinearLayout>

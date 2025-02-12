@@ -11,7 +11,5 @@
     <color name="grey">#B1B1B1</color>
     <color name="colorCardBackground">#FFFFFF</color>
     <color name="colorHint">#808080</color>
-
-
-
+    <color name="colorPopUpBackgroundSubNivel">#FBF0CE</color>
 </resources>
