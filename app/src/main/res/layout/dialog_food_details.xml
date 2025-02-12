@@ -42,4 +42,16 @@
             android:text="Instrucciones" />
     </ScrollView>
 
+    <Button
+        android:id="@+id/btnAddToFavorites"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Añadir a Favoritos"
+        android:textSize="16sp"
+        android:backgroundTint="@color/colorButtonAdd"
+        android:textStyle="bold"
+        android:padding="8dp"/>
+
+
 </LinearLayout>

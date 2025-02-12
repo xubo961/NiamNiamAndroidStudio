@@ -1,6 +1,8 @@
 package com.xubop961.niamniamapp.fragments;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.xubop961.niamniamapp.R;
 import com.xubop961.niamniamapp.adapters.FoodAdapter;
 import com.xubop961.niamniamapp.api.ApiClient;
@@ -26,6 +30,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+
+import java.lang.reflect.Type;
 import java.util.List;
 
 public class HomePage extends Fragment {
@@ -100,6 +106,7 @@ public class HomePage extends Fragment {
         ImageView imageView = dialogView.findViewById(R.id.dialogFoodImage);
         TextView textViewNombre = dialogView.findViewById(R.id.dialogFoodName);
         TextView textViewInstrucciones = dialogView.findViewById(R.id.dialogFoodInstruction);
+        Button btnAddToFavorites = dialogView.findViewById(R.id.btnAddToFavorites);
 
         textViewNombre.setText(meal.getMealName());
 
@@ -109,11 +116,39 @@ public class HomePage extends Fragment {
 
         textViewInstrucciones.setText(meal.getInstructions());
 
+        btnAddToFavorites.setOnClickListener(v -> {
+            guardarEnFavoritos(meal);
+            Toast.makeText(getContext(), "Añadido a Favoritos", Toast.LENGTH_SHORT).show();
+        });
+
         new MaterialAlertDialogBuilder(getContext())
                 .setView(dialogView)
                 .setPositiveButton("Cerrar", (dialog, which) -> dialog.dismiss())
                 .show();
     }
+
+    private void guardarEnFavoritos(Meals.Meal meal) {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("FAVORITOS", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        Gson gson = new Gson();
+        String favoritosJson = sharedPreferences.getString("favoritos_lista", "[]");
+        Type type = new TypeToken<List<Meals.Meal>>() {}.getType();
+        List<Meals.Meal> favoritos = gson.fromJson(favoritosJson, type);
+
+        // Evitar duplicados
+        for (Meals.Meal fav : favoritos) {
+            if (fav.getMealName().equals(meal.getMealName())) {
+                return;
+            }
+        }
+
+        favoritos.add(meal);
+        editor.putString("favoritos_lista", gson.toJson(favoritos));
+        editor.apply();
+    }
+
+
 
 
 }
