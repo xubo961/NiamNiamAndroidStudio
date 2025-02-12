@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,12 +41,14 @@ public class FavoritosPage extends Fragment {
         View view = inflater.inflate(R.layout.fragment_favoritos_page, container, false);
 
         recyclerView = view.findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
         cargarFavoritos();
 
         return view;
     }
+
 
     private void cargarFavoritos() {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("FAVORITOS", Context.MODE_PRIVATE);
@@ -54,11 +58,11 @@ public class FavoritosPage extends Fragment {
         List<Meals.Meal> favoritos = gson.fromJson(favoritosJson, type);
 
         if (favoritos == null) {
-            favoritos = new ArrayList<>(); // Evitar null pointer exception
+            favoritos = new ArrayList<>();
         }
 
         adapter = new FoodAdapter(getContext(), favoritos, meal -> {
-            mostrarDialogoReceta(meal); // Este método debe existir o reemplázalo con tu lógica
+            mostrarDialogoReceta(meal);
         });
 
         recyclerView.setAdapter(adapter);
@@ -71,7 +75,10 @@ public class FavoritosPage extends Fragment {
         ImageView imageView = dialogView.findViewById(R.id.dialogFoodImage);
         TextView textViewNombre = dialogView.findViewById(R.id.dialogFoodName);
         TextView textViewInstrucciones = dialogView.findViewById(R.id.dialogFoodInstruction);
-        Button btnAddToFavorites = dialogView.findViewById(R.id.btnAddToFavorites);
+
+        // Cambiar de Button a ImageButton
+        ImageButton btnAddToFavorites = dialogView.findViewById(R.id.btnAddToFavorites);
+        ImageButton btnRemoveFromFavorites = dialogView.findViewById(R.id.btnRemoveFromFavorites); // Cambiar aquí también
 
         textViewNombre.setText(meal.getMealName());
 
@@ -81,9 +88,91 @@ public class FavoritosPage extends Fragment {
 
         textViewInstrucciones.setText(meal.getInstructions());
 
+        // Verificar si la receta ya está en favoritos
+        if (estaEnFavoritos(meal)) {
+            btnAddToFavorites.setVisibility(View.GONE); // Ocultar el botón de agregar
+            btnRemoveFromFavorites.setVisibility(View.VISIBLE); // Mostrar el botón de quitar
+        } else {
+            btnAddToFavorites.setVisibility(View.VISIBLE); // Mostrar el botón de agregar
+            btnRemoveFromFavorites.setVisibility(View.GONE); // Ocultar el botón de quitar
+        }
+
+        // Añadir a favoritos
+        btnAddToFavorites.setOnClickListener(v -> {
+            guardarEnFavoritos(meal);
+            Toast.makeText(getContext(), "Añadido a Favoritos", Toast.LENGTH_SHORT).show();
+            btnAddToFavorites.setVisibility(View.GONE); // Ocultar el botón de añadir
+            btnRemoveFromFavorites.setVisibility(View.VISIBLE); // Mostrar el botón de quitar
+        });
+
+        // Quitar de favoritos
+        btnRemoveFromFavorites.setOnClickListener(v -> {
+            quitarDeFavoritos(meal);
+            Toast.makeText(getContext(), "Quitado de Favoritos", Toast.LENGTH_SHORT).show();
+            btnAddToFavorites.setVisibility(View.VISIBLE); // Mostrar el botón de añadir
+            btnRemoveFromFavorites.setVisibility(View.GONE); // Ocultar el botón de quitar
+        });
+
         new MaterialAlertDialogBuilder(getContext())
                 .setView(dialogView)
                 .setPositiveButton("Cerrar", (dialog, which) -> dialog.dismiss())
                 .show();
+    }
+
+    private boolean estaEnFavoritos(Meals.Meal meal) {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("FAVORITOS", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String favoritosJson = sharedPreferences.getString("favoritos_lista", "[]");
+        Type type = new TypeToken<List<Meals.Meal>>() {}.getType();
+        List<Meals.Meal> favoritos = gson.fromJson(favoritosJson, type);
+
+        for (Meals.Meal fav : favoritos) {
+            if (fav.getMealName().equals(meal.getMealName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void guardarEnFavoritos(Meals.Meal meal) {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("FAVORITOS", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        Gson gson = new Gson();
+        String favoritosJson = sharedPreferences.getString("favoritos_lista", "[]");
+        Type type = new TypeToken<List<Meals.Meal>>() {}.getType();
+        List<Meals.Meal> favoritos = gson.fromJson(favoritosJson, type);
+
+        // Evitar duplicados
+        for (Meals.Meal fav : favoritos) {
+            if (fav.getMealName().equals(meal.getMealName())) {
+                return;
+            }
+        }
+
+        favoritos.add(meal);
+        editor.putString("favoritos_lista", gson.toJson(favoritos));
+        editor.apply();
+    }
+
+    private void quitarDeFavoritos(Meals.Meal meal) {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("FAVORITOS", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        Gson gson = new Gson();
+        String favoritosJson = sharedPreferences.getString("favoritos_lista", "[]");
+        Type type = new TypeToken<List<Meals.Meal>>() {}.getType();
+        List<Meals.Meal> favoritos = gson.fromJson(favoritosJson, type);
+
+        // Eliminar receta de favoritos
+        for (Meals.Meal fav : favoritos) {
+            if (fav.getMealName().equals(meal.getMealName())) {
+                favoritos.remove(fav);
+                break;
+            }
+        }
+
+        editor.putString("favoritos_lista", gson.toJson(favoritos));
+        editor.apply();
     }
 }

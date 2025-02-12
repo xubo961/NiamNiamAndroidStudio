@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -106,7 +107,9 @@ public class HomePage extends Fragment {
         ImageView imageView = dialogView.findViewById(R.id.dialogFoodImage);
         TextView textViewNombre = dialogView.findViewById(R.id.dialogFoodName);
         TextView textViewInstrucciones = dialogView.findViewById(R.id.dialogFoodInstruction);
-        Button btnAddToFavorites = dialogView.findViewById(R.id.btnAddToFavorites);
+
+        ImageButton btnAddToFavorites = dialogView.findViewById(R.id.btnAddToFavorites);
+        ImageButton btnRemoveFromFavorites = dialogView.findViewById(R.id.btnRemoveFromFavorites);
 
         textViewNombre.setText(meal.getMealName());
 
@@ -116,15 +119,48 @@ public class HomePage extends Fragment {
 
         textViewInstrucciones.setText(meal.getInstructions());
 
+        if (estaEnFavoritos(meal)) {
+            btnAddToFavorites.setVisibility(View.GONE); // Ocultar el botón de agregar
+            btnRemoveFromFavorites.setVisibility(View.VISIBLE); // Mostrar el botón de quitar
+        } else {
+            btnAddToFavorites.setVisibility(View.VISIBLE); // Mostrar el botón de agregar
+            btnRemoveFromFavorites.setVisibility(View.GONE); // Ocultar el botón de quitar
+        }
+
         btnAddToFavorites.setOnClickListener(v -> {
             guardarEnFavoritos(meal);
             Toast.makeText(getContext(), "Añadido a Favoritos", Toast.LENGTH_SHORT).show();
+            btnAddToFavorites.setVisibility(View.GONE);
+            btnRemoveFromFavorites.setVisibility(View.VISIBLE);
+        });
+
+        btnRemoveFromFavorites.setOnClickListener(v -> {
+            quitarDeFavoritos(meal);
+            Toast.makeText(getContext(), "Quitado de Favoritos", Toast.LENGTH_SHORT).show();
+            btnAddToFavorites.setVisibility(View.VISIBLE);
+            btnRemoveFromFavorites.setVisibility(View.GONE);
         });
 
         new MaterialAlertDialogBuilder(getContext())
                 .setView(dialogView)
                 .setPositiveButton("Cerrar", (dialog, which) -> dialog.dismiss())
                 .show();
+    }
+
+
+    private boolean estaEnFavoritos(Meals.Meal meal) {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("FAVORITOS", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String favoritosJson = sharedPreferences.getString("favoritos_lista", "[]");
+        Type type = new TypeToken<List<Meals.Meal>>() {}.getType();
+        List<Meals.Meal> favoritos = gson.fromJson(favoritosJson, type);
+
+        for (Meals.Meal fav : favoritos) {
+            if (fav.getMealName().equals(meal.getMealName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void guardarEnFavoritos(Meals.Meal meal) {
@@ -148,8 +184,25 @@ public class HomePage extends Fragment {
         editor.apply();
     }
 
+    private void quitarDeFavoritos(Meals.Meal meal) {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("FAVORITOS", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
 
+        Gson gson = new Gson();
+        String favoritosJson = sharedPreferences.getString("favoritos_lista", "[]");
+        Type type = new TypeToken<List<Meals.Meal>>() {}.getType();
+        List<Meals.Meal> favoritos = gson.fromJson(favoritosJson, type);
 
+        for (Meals.Meal fav : favoritos) {
+            if (fav.getMealName().equals(meal.getMealName())) {
+                favoritos.remove(fav);
+                break;
+            }
+        }
+
+        editor.putString("favoritos_lista", gson.toJson(favoritos));
+        editor.apply();
+    }
 
 }
 
