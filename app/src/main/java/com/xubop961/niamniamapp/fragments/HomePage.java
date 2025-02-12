@@ -120,11 +120,11 @@ public class HomePage extends Fragment {
         textViewInstrucciones.setText(meal.getInstructions());
 
         if (estaEnFavoritos(meal)) {
-            btnAddToFavorites.setVisibility(View.GONE); // Ocultar el botón de agregar
-            btnRemoveFromFavorites.setVisibility(View.VISIBLE); // Mostrar el botón de quitar
+            btnAddToFavorites.setVisibility(View.GONE);
+            btnRemoveFromFavorites.setVisibility(View.VISIBLE);
         } else {
-            btnAddToFavorites.setVisibility(View.VISIBLE); // Mostrar el botón de agregar
-            btnRemoveFromFavorites.setVisibility(View.GONE); // Ocultar el botón de quitar
+            btnAddToFavorites.setVisibility(View.VISIBLE);
+            btnRemoveFromFavorites.setVisibility(View.GONE);
         }
 
         btnAddToFavorites.setOnClickListener(v -> {
