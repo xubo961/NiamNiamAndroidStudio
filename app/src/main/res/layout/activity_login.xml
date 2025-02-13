@@ -56,33 +56,7 @@
 
 
 
-            <!-- Barra de navegación inferior -->
-
-
-           <!-- <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottom_nav"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@color/grey"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:menu="@menu/bottom_nav_login"
-                app:itemTextColor="@color/bottom_nav_color"
-                app:itemRippleColor="@color/bottom_nav_color"
-
-                /> -->
-
-           <!-- <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottom_nav"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:background="@color/color_PopUpBacground"
-                app:elevation="0dp"
-                style="@style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface"
-                app:itemTextColor="@color/bottom_nav_color"
-                app:itemIconTint="@color/bottom_nav_color"
-                app:menu="@menu/bottom_nav_login"
-                app:labelVisibilityMode="labeled"/> -->
+            <!-- Barra de navegación  -->
 
             <FrameLayout
                 android:layout_width="match_parent"
