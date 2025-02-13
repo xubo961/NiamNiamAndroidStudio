@@ -47,7 +47,7 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/quicksand_light"
                         android:text="Imagen de la Receta"
@@ -55,7 +55,7 @@
                         android:textColor="@color/colorText"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        android:background="@color/colorButtonAdd"
+                        android:background="@drawable/rounded_yellow_buttons"
                         android:layout_gravity="center"/>
 
                     <ImageView
@@ -72,7 +72,7 @@
                         android:id="@+id/btnSelectImage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/colorButtonAdd"
+                        android:backgroundTint="@color/colorYellowButtons"
                         android:fontFamily="@font/quicksand_light"
                         android:text="Seleccionar Imagen"
                         android:textColor="@color/colorText"
@@ -98,7 +98,7 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/quicksand_light"
                         android:text="Nombre de la Receta"
@@ -106,7 +106,7 @@
                         android:textColor="@color/colorText"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        android:background="@color/colorButtonAdd"
+                        android:background="@drawable/rounded_yellow_buttons"
                         android:layout_gravity="center"/>
 
                     <EditText
@@ -136,15 +136,16 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="130dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/quicksand_light"
                         android:text="Ingredientes"
                         android:textColor="@color/colorText"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        android:background="@color/colorButtonAdd"
-                        android:layout_gravity="center"/>
+                        android:background="@drawable/rounded_yellow_buttons"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"/>
 
                     <EditText
                         android:id="@+id/textIngredientes"
@@ -174,15 +175,16 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="130dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/quicksand_light"
                         android:text="Instrucciones"
                         android:textColor="@color/colorText"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        android:background="@color/colorButtonAdd"
-                        android:layout_gravity="center"/>
+                        android:background="@drawable/rounded_yellow_buttons"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"/>
 
                     <EditText
                         android:id="@+id/tetxInstrucciones"
@@ -198,16 +200,18 @@
 
             <Button
                 android:id="@+id/btnGuardarReceta"
-                android:layout_width="match_parent"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:backgroundTint="@color/colorButtonAdd"
+                android:backgroundTint="@color/colorYellowButtons"
                 android:fontFamily="@font/quicksand_light"
                 android:text="Guardar"
                 android:textColor="@color/colorText"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:cornerRadius="8dp" />
+                app:cornerRadius="8dp"
+                android:layout_gravity="center"
+                />
         </LinearLayout>
     </ScrollView>
 </FrameLayout>
