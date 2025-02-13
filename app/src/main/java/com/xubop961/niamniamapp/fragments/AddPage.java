@@ -88,7 +88,6 @@ public class AddPage extends Fragment {
 
     private void showIngredientesDialog() {
 
-        // Usa getActivity() para obtener el contexto adecuado en un fragmento
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         builder.setTitle("Selecciona los ingredientes: ");
@@ -100,7 +99,7 @@ public class AddPage extends Fragment {
                         if (isChecked) {
                             listIngredientes.add(which);
                         } else {
-                            listIngredientes.remove(Integer.valueOf(which));  // Usa Integer.valueOf para evitar problemas al eliminar el índice
+                            listIngredientes.remove(Integer.valueOf(which));
                         }
                     }
                 })

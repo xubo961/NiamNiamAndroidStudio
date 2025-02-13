@@ -117,7 +117,12 @@ public class HomePage extends Fragment {
                 .load(meal.getMealImageUrl())
                 .into(imageView);
 
-        textViewInstrucciones.setText(meal.getInstructions());
+        String instrucciones = meal.getInstructions();
+        if (instrucciones != null && !instrucciones.isEmpty()) {
+            textViewInstrucciones.setText(instrucciones);
+        } else {
+            textViewInstrucciones.setText("No hay instrucciones disponibles.");
+        }
 
         if (estaEnFavoritos(meal)) {
             btnAddToFavorites.setVisibility(View.GONE);
@@ -146,6 +151,7 @@ public class HomePage extends Fragment {
                 .setPositiveButton("Cerrar", (dialog, which) -> dialog.dismiss())
                 .show();
     }
+
 
 
     private boolean estaEnFavoritos(Meals.Meal meal) {
