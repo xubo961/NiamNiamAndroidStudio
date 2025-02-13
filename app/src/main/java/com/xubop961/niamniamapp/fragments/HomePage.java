@@ -100,7 +100,7 @@ public class HomePage extends Fragment {
         });
     }
 
-   private void mostrarDialogoReceta(Meals.Meal meal) {
+    private void mostrarDialogoReceta(Meals.Meal meal) {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View dialogView = inflater.inflate(R.layout.dialog_food_details, null);
 
@@ -151,7 +151,6 @@ public class HomePage extends Fragment {
                 .setPositiveButton("Cerrar", (dialog, which) -> dialog.dismiss())
                 .show();
     }
-
 
 
     private boolean estaEnFavoritos(Meals.Meal meal) {
