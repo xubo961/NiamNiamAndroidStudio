@@ -5,6 +5,7 @@
         android:title="Login" />
     <item
         android:id="@+id/nav_register"
-        android:title="Register" />
+        android:title="Register"
+        />
 
 </menu>

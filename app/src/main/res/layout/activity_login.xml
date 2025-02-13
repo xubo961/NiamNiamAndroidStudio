@@ -12,8 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15"
-        />
+        app:layout_constraintGuide_begin="110dp" />
 
     <View
         android:id="@+id/splashGradient"
@@ -39,8 +38,8 @@
         app:layout_constraintTop_toTopOf="@+id/logoSplash"
         android:layout_marginTop="280dp"
         android:layout_marginBottom="60dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginEnd="70dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
         app:cardCornerRadius="20dp"
         android:backgroundTint="@color/color_PopUpBacground"
         >
@@ -55,25 +54,42 @@
             android:layout_marginBottom="10dp"
             android:orientation="vertical">
 
+
+
+            <!-- Barra de navegación  -->
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/bottom_nav_background"
+                android:clipToOutline="true">
+
+                <com.google.android.material.bottomnavigation.BottomNavigationView
+                    android:id="@+id/bottom_nav"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@android:color/transparent"
+                app:elevation="0dp"
+                style="@style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface"
+                app:itemTextColor="@color/white"
+                app:itemIconTint="@color/bottom_nav_color"
+                app:itemBackground="@drawable/bottom_nav_item_background"
+                app:menu="@menu/bottom_nav_login"
+                app:labelVisibilityMode="labeled"/>
+            </FrameLayout>
+
+
+
             <!-- Contenedor de los Fragmentos -->
+
+
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragment_container"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="match_parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/bottom_nav"/>
-
-            <!-- Barra de navegación inferior -->
-
-
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottom_nav"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="?android:attr/windowBackground"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:menu="@menu/bottom_nav_login"
-                />
 
 
 

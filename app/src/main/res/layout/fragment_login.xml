@@ -1,89 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.LoginFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- CardView centrado en la pantalla -->
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="@+id/logoSplash"
-
+        android:layout_width="350dp"
+        android:layout_height="550dp"
         app:cardCornerRadius="20dp"
         android:backgroundTint="@color/color_PopUpBacground"
-        >
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <LinearLayout
-            android:id="@+id/ParametrosCardViewImput"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:orientation="vertical">
+            android:padding="20dp">
 
+            <LinearLayout
+                android:id="@+id/ParametrosCardViewImput"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="20dp">
 
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputEmail"
-                android:layout_width="350dp"
-                android:layout_height="60dp"
-                android:hint="Email"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="160dp"
-                >
-
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:importantForAccessibility="yes"
-                    android:contentDescription="Campo de correo electrónico"
-                    android:textSize="25dp"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginTop="60dp"
+                    android:hint="Email"
+                    >
 
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="Campo de correo electrónico"
+                        android:importantForAccessibility="yes"
+                        android:inputType="textEmailAddress"
+                        android:textSize="18sp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputPassword"
-                android:layout_width="350dp"
-                android:layout_height="60dp"
-                android:hint="Password"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="60dp"
-                >
-
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:importantForAccessibility="yes"
-                    android:contentDescription="Campo de contraseña"
-                    android:textSize="24dp"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginTop="60dp"
+                    android:hint="Password">
 
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="Campo de contraseña"
+                        android:importantForAccessibility="yes"
+                        android:inputType="textPassword"
+                        android:textSize="18sp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
-                android:id="@+id/botonLogin"
-                android:layout_width="250dp"
-                android:layout_height="75dp"
-                android:layout_marginStart="75dp"
-                android:layout_marginTop="80dp"
-                android:text="Log in"
-                android:textSize="20dp"
-                android:backgroundTint="@color/color_Priamry"
-                />
+                <Button
+                    android:id="@+id/botonLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="60dp"
+                    android:backgroundTint="@color/color_Priamry"
+                    android:text="Log in"
+                    android:textSize="20sp" />
 
+            </LinearLayout>
 
-
-
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
