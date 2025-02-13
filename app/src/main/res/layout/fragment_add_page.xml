@@ -121,6 +121,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cvIngredientes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -129,34 +130,26 @@
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:padding="16dp">
 
                     <TextView
-                        android:layout_width="130dp"
+                        android:id="@+id/selectIngredientes"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/quicksand_light"
-                        android:text="Ingredientes"
-                        android:textColor="@color/colorText"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:background="@drawable/rounded_yellow_buttons"
-                        android:layout_gravity="center"
-                        android:textAlignment="center"/>
-
-                    <EditText
-                        android:id="@+id/textIngredientes"
-                        android:layout_width="match_parent"
+                        android:hint="Seleccionar ingredientes"
+                        android:layout_centerInParent="true"
+                        />
+                    
+                    <ImageView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="Escribe los ingredientes"
-                        android:inputType="textMultiLine"
-                        android:minLines="3"
-                        android:textColorHint="@color/colorHint"
-                        android:background="@color/colorPopUpBackgroundSubNivel"/>
-                </LinearLayout>
+                        android:src="@drawable/baseline_arrow_drop_down_24"
+                        android:layout_centerInParent="true"
+                        android:layout_alignParentEnd="true"/>
+                </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
