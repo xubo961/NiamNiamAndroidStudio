@@ -8,8 +8,13 @@
         app:showAsAction="never"
         />
     <item
-        android:id="@+id/acercadeButton"
-        android:title="Acerca de"
+        android:id="@+id/acercadeBo"
+        android:title="Acerca de Bo"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/acercadeSanti"
+        android:title="Acerca de Santiago"
         app:showAsAction="never"
         />
     <item

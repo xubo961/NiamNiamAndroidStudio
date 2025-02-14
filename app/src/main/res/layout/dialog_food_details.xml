@@ -42,12 +42,10 @@
             app:tint="@color/color_Priamry"/>
     </LinearLayout>
 
-
-
     <ImageView
         android:id="@+id/dialogFoodImage"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
+        android:layout_width="280dp"
+        android:layout_height="220dp"
         android:layout_gravity="center"
         android:scaleType="centerCrop"
         android:contentDescription="Imagen de la comida" />
@@ -57,17 +55,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:gravity="center"
         android:text="Nombre de la comida"
-        android:fontFamily="@font/quicksand_light" />
-
+        android:fontFamily="@font/quicksand_bold"
+        android:textColor="@color/colorText" />
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:layout_weight="1">
 
         <TextView
             android:id="@+id/dialogFoodInstruction"
@@ -75,11 +74,11 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:fontFamily="@font/quicksand_light"
-            android:textStyle="bold"
             android:textColor="@color/colorText"
-            android:padding="8dp"
             android:text="Instrucciones"
-            />
+            android:padding="8dp"
+            android:textAlignment="center"
+            android:textStyle="bold"/>
 
     </ScrollView>
 
