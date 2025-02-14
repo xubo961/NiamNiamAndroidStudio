@@ -54,7 +54,7 @@ public class LoginFragment extends Fragment {
         }
 
         // Verificar si las credenciales son correctas
-        if (email.equals("admin@gmail.com") && password.equals("123456")) {
+        if (email.equals("123") && password.equals("123")) {
             Toast.makeText(getContext(), "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
 
             // Redirigir a MainActivity

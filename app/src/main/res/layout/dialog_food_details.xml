@@ -3,11 +3,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@color/color_Background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        >
+
+        <ImageButton
+            android:id="@+id/btnAddToFavorites"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:scaleType="centerInside"
+            android:padding="8dp"
+            android:src="@drawable/baseline_favorite_24"
+            android:contentDescription="Añadir a favoritos"
+            app:tint="@color/color_Priamry" />
+
+        <Space
+            android:layout_width="32dp"
+            android:layout_height="match_parent" />
+
+        <ImageButton
+            android:id="@+id/btnRemoveFromFavorites"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:scaleType="centerInside"
+            android:padding="8dp"
+            android:src="@drawable/baseline_clear_24"
+            android:contentDescription="Quitar de favoritos"
+            app:tint="@color/color_Priamry"/>
+    </LinearLayout>
+
+
 
     <ImageView
         android:id="@+id/dialogFoodImage"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="200dp"
         android:layout_gravity="center"
         android:scaleType="centerCrop"
@@ -36,45 +75,13 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:fontFamily="@font/quicksand_light"
-            android:textStyle="normal"
+            android:textStyle="bold"
             android:textColor="@color/colorText"
             android:padding="8dp"
-            android:text="Instrucciones" />
+            android:text="Instrucciones"
+            />
 
     </ScrollView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-        <ImageButton
-            android:id="@+id/btnAddToFavorites"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:scaleType="centerInside"
-            android:padding="8dp"
-            android:src="@drawable/baseline_favorite_24"
-            android:contentDescription="Añadir a favoritos"
-            app:tint="#000000" />
-
-        <Space
-            android:layout_width="32dp"
-            android:layout_height="match_parent" />
-
-        <ImageButton
-            android:id="@+id/btnRemoveFromFavorites"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:scaleType="centerInside"
-            android:padding="8dp"
-            android:src="@drawable/baseline_clear_24"
-            android:contentDescription="Quitar de favoritos"
-            app:tint="#000000"/>
-    </LinearLayout>
 
 </LinearLayout>

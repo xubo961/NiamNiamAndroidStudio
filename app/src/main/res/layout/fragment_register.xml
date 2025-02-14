@@ -28,7 +28,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="20dp">
+                android:padding="20dp"
+                tools:layout_editor_absoluteX="20dp"
+                tools:layout_editor_absoluteY="16dp">
 
                 <com.google.android.material.textfield.TextInputLayout
 
@@ -41,26 +43,30 @@
                         android:id="@+id/inputName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
-                        android:importantForAccessibility="yes"
                         android:contentDescription="Campo de nombre"
-                        android:textSize="18sp"/>
+                        android:fontFamily="@font/quicksand_light"
+                        android:importantForAccessibility="yes"
+                        android:inputType="textPersonName"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:hint="Email">
+                    android:fontFamily="@font/quicksand_light"
+                    android:hint="Email"
+                    android:textStyle="bold">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/inputEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textEmailAddress"
-                        android:importantForAccessibility="yes"
                         android:contentDescription="Campo de correo electrónico"
-                        android:textSize="18sp"/>
+                        android:importantForAccessibility="yes"
+                        android:inputType="textEmailAddress"
+                        android:textSize="18sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -73,10 +79,12 @@
                         android:id="@+id/inputPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPassword"
-                        android:importantForAccessibility="yes"
                         android:contentDescription="Campo de contraseña"
-                        android:textSize="18sp"/>
+                        android:importantForAccessibility="yes"
+                        android:inputType="textPassword"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/quicksand_light"
+                        android:textStyle="bold"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -89,10 +97,12 @@
                         android:id="@+id/inputRepeatPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPassword"
-                        android:importantForAccessibility="yes"
                         android:contentDescription="Campo de repetir contraseña"
-                        android:textSize="18sp"/>
+                        android:importantForAccessibility="yes"
+                        android:inputType="textPassword"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/quicksand_light"
+                        android:textStyle="bold"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
@@ -100,9 +110,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
+                    android:backgroundTint="@color/color_Priamry"
                     android:text="Register"
                     android:textSize="20sp"
-                    android:backgroundTint="@color/color_Priamry"/>
+                    android:fontFamily="@font/quicksand_light"
+                    android:textStyle="bold"/>
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

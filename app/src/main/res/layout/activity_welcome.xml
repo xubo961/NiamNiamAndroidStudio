@@ -53,6 +53,8 @@
         android:layout_marginTop="10dp"
         android:text="Log in"
         android:backgroundTint="@color/color_Priamry"
+        android:fontFamily="@font/quicksand_light"
+        android:textStyle="bold"
         />
 
     <TextView
@@ -64,6 +66,8 @@
         android:text="Dont have an account? Sign up"
         android:textColor="@color/colorText"
         android:onClick="onLoginClick"
+        android:fontFamily="@font/quicksand_light"
+        android:textStyle="bold"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

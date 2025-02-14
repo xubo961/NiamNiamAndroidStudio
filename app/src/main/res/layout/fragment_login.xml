@@ -45,7 +45,9 @@
                         android:contentDescription="Campo de correo electrónico"
                         android:importantForAccessibility="yes"
                         android:inputType="textEmailAddress"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:fontFamily="@font/quicksand_light"
+                        android:textStyle="bold"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -61,7 +63,9 @@
                         android:contentDescription="Campo de contraseña"
                         android:importantForAccessibility="yes"
                         android:inputType="textPassword"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:fontFamily="@font/quicksand_light"
+                        android:textStyle="bold"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
@@ -71,7 +75,9 @@
                     android:layout_marginTop="60dp"
                     android:backgroundTint="@color/color_Priamry"
                     android:text="Log in"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:fontFamily="@font/quicksand_light"
+                    android:textStyle="bold"/>
 
             </LinearLayout>
 
