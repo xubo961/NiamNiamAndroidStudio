@@ -1,66 +1,75 @@
 package com.xubop961.niamniamapp.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.xubop961.niamniamapp.R;
+import com.xubop961.niamniamapp.adapters.FoodAdapter;
+import com.xubop961.niamniamapp.api.Meals;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PerfilPage#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class PerfilPage extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public PerfilPage() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PerfilPage.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PerfilPage newInstance(String param1, String param2) {
-        PerfilPage fragment = new PerfilPage();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private RecyclerView recyclerView;
+    private FoodAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_perfil_page, container, false);
+    }
+
+    private void cargarTusRecetas() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("FAVORITOS", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String favoritosJson = sharedPreferences.getString("favoritos_lista", "[]");
+        Type type = new TypeToken<List<Meals.Meal>>() {}.getType();
+        List<Meals.Meal> favoritos = gson.fromJson(favoritosJson, type);
+
+        if (favoritos == null) {
+            favoritos = new ArrayList<>();
+        }
+
+        adapter = new FoodAdapter(getContext(), favoritos, meal -> {
+            mostrarDialogoReceta(meal);
+        });
+
+        recyclerView.setAdapter(adapter);
+    }
+
+    private void mostrarDialogoReceta(Meals.Meal meal) {LayoutInflater inflater = LayoutInflater.from(getContext());
+        View dialogView = inflater.inflate(R.layout.dialog_food_details, null);
+
+        ImageView imageView = dialogView.findViewById(R.id.dialogFoodImage);
+        TextView textViewNombre = dialogView.findViewById(R.id.dialogFoodName);
+        TextView textViewInstrucciones = dialogView.findViewById(R.id.dialogFoodInstruction);
+
+        textViewNombre.setText(meal.getMealName());
+
+        Glide.with(getContext())
+                .load(meal.getMealImageUrl())
+                .into(imageView);
+
+        textViewInstrucciones.setText(meal.getInstructions());
     }
 }
