@@ -43,7 +43,6 @@ public class LoginFragment extends Fragment {
         // Configurar evento del botón
         btnLogin.setOnClickListener(v -> loginUser());
     }
-
     private void loginUser() {
         String email = editEmail.getText().toString().trim();
         String password = editPassword.getText().toString().trim();

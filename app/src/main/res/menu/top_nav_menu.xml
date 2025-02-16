@@ -4,17 +4,17 @@
 
     <item
         android:id="@+id/configuracionButton"
-        android:title="Configuración"
+        android:title="Settings"
         app:showAsAction="never"
         />
     <item
         android:id="@+id/acercadeButton"
-        android:title="Acerca de"
+        android:title="About"
         app:showAsAction="never"
         />
     <item
         android:id="@+id/cerrarSeionButton"
-        android:title="Cerrar sesión"
+        android:title="Log Out"
         app:showAsAction="never"
         />
 </menu>

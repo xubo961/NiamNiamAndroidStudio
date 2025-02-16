@@ -35,6 +35,7 @@ dependencies {
     implementation ("androidx.navigation:navigation-fragment-ktx:2.8.6")
     implementation ("androidx.navigation:navigation-ui-ktx:2.8.6")
     implementation ("com.google.android.material:material:1.9.0")
+    implementation ("com.google.code.gson:gson:2.8.6")
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
     implementation(libs.retrofit.v2110)

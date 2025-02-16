@@ -6,14 +6,14 @@
         android:icon="@drawable/baseline_home_24"/>
     <item
         android:id="@+id/favoritos"
-        android:title="Favoritos"
+        android:title="Favorites"
         android:icon="@drawable/baseline_star_24"/>
     <item
         android:id="@+id/añadir"
-        android:title="Añadir"
+        android:title="Add"
         android:icon="@drawable/baseline_add_circle_24"/>
     <item
         android:id="@+id/perfil"
-        android:title="Perfil"
+        android:title="Profile"
         android:icon="@drawable/baseline_person_24"/>
 </menu>
