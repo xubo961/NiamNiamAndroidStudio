@@ -6,12 +6,10 @@
     <color name="color_PopUpBacground">#F8F2DE</color>
     <color name="color_UnselectedButton">#E1DEDE</color>
     <color name="colorText">#000000</color>
-    <color name="colorButtonAdd">#FFF081</color>
+    <color name="colorYellowButtons">#FFF081</color>
     <color name="white">#FFFFFF</color>
     <color name="grey">#B1B1B1</color>
     <color name="colorCardBackground">#FFFFFF</color>
     <color name="colorHint">#808080</color>
-
-
-
+    <color name="colorPopUpBackgroundSubNivel">#FBF0CE</color>
 </resources>

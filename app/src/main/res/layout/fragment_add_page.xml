@@ -47,14 +47,16 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/quicksand_light"
                         android:text="Imagen de la Receta"
                         android:textAlignment="center"
                         android:textColor="@color/colorText"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:background="@drawable/rounded_yellow_buttons"
+                        android:layout_gravity="center"/>
 
                     <ImageView
                         android:id="@+id/selectImage"
@@ -70,7 +72,7 @@
                         android:id="@+id/btnSelectImage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/colorButtonAdd"
+                        android:backgroundTint="@color/colorYellowButtons"
                         android:fontFamily="@font/quicksand_light"
                         android:text="Seleccionar Imagen"
                         android:textColor="@color/colorText"
@@ -96,14 +98,16 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/quicksand_light"
                         android:text="Nombre de la Receta"
                         android:textAlignment="center"
                         android:textColor="@color/colorText"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:background="@drawable/rounded_yellow_buttons"
+                        android:layout_gravity="center"/>
 
                     <EditText
                         android:id="@+id/textRecetaName"
@@ -111,8 +115,41 @@
                         android:layout_height="wrap_content"
                         android:hint="Escribe el nombre de la receta"
                         android:inputType="textCapWords"
-                        android:textColorHint="@color/colorHint" />
+                        android:textColorHint="@color/colorHint"
+                        android:background="@color/colorPopUpBackgroundSubNivel"/>
                 </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvIngredientes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                app:cardBackgroundColor="@color/color_PopUpBacground"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/selectIngredientes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Seleccionar ingredientes"
+                        android:layout_centerInParent="true"
+                        />
+                    
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_arrow_drop_down_24"
+                        android:layout_centerInParent="true"
+                        android:layout_alignParentEnd="true"/>
+                </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -131,48 +168,16 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/quicksand_light"
-                        android:text="Ingredientes"
-                        android:textColor="@color/colorText"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/textIngredientes"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Escribe los ingredientes"
-                        android:inputType="textMultiLine"
-                        android:minLines="3"
-                        android:textColorHint="@color/colorHint" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
-                app:cardBackgroundColor="@color/color_PopUpBacground"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="130dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/quicksand_light"
                         android:text="Instrucciones"
                         android:textColor="@color/colorText"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:background="@drawable/rounded_yellow_buttons"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"/>
 
                     <EditText
                         android:id="@+id/tetxInstrucciones"
@@ -181,22 +186,25 @@
                         android:hint="Escribe las instrucciones"
                         android:inputType="textMultiLine"
                         android:minLines="6"
-                        android:textColorHint="@color/colorHint" />
+                        android:textColorHint="@color/colorHint"
+                        android:background="@color/colorPopUpBackgroundSubNivel"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <Button
                 android:id="@+id/btnGuardarReceta"
-                android:layout_width="match_parent"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:backgroundTint="@color/colorButtonAdd"
+                android:backgroundTint="@color/colorYellowButtons"
                 android:fontFamily="@font/quicksand_light"
-                android:text="Guardar Receta"
+                android:text="Guardar"
                 android:textColor="@color/colorText"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:cornerRadius="8dp" />
+                app:cornerRadius="8dp"
+                android:layout_gravity="center"
+                />
         </LinearLayout>
     </ScrollView>
 </FrameLayout>
