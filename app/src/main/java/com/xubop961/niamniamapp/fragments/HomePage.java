@@ -53,7 +53,7 @@ public class HomePage extends Fragment {
         recyclerView = view.findViewById(R.id.recycler_view);
         buscarRecetas = view.findViewById(R.id.buscarRecetas);
         btnBuscar = view.findViewById(R.id.btnBuscar);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
         Retrofit retrofit = ApiClient.getClient();
         apiService = retrofit.create(ApiInterface.class);

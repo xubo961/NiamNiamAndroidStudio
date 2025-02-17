@@ -66,7 +66,9 @@
                         android:contentDescription="Campo de correo electrónico"
                         android:importantForAccessibility="yes"
                         android:inputType="textEmailAddress"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:fontFamily="@font/quicksand_light"
+                        android:textStyle="bold"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout

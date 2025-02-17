@@ -52,7 +52,8 @@
                     android:textAlignment="center"
                     android:textColor="@color/colorText"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    />
 
                 <EditText
                     android:id="@+id/textoNombreUsuario"
@@ -62,7 +63,9 @@
                     android:background="@color/colorPopUpBackgroundSubNivel"
                     android:hint="Escribe tu nombre de usario"
                     android:inputType="textCapWords"
-                    android:textColorHint="@color/colorHint" />
+                    android:textColorHint="@color/colorHint"
+                    android:fontFamily="@font/quicksand_light"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:layout_width="120dp"
@@ -84,7 +87,10 @@
                     android:background="@color/colorPopUpBackgroundSubNivel"
                     android:hint="Descripción..."
                     android:inputType="textMultiLine"
-                    android:textColorHint="@color/colorHint" />
+                    android:textColorHint="@color/colorHint"
+                    android:fontFamily="@font/quicksand_light"
+                    android:textStyle="bold"
+                    android:minLines="4"/>
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
