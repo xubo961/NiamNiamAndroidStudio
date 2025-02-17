@@ -49,7 +49,6 @@
                     android:layout_marginTop="5dp"
                     android:background="@drawable/rounded_yellow_buttons"
                     android:fontFamily="@font/quicksand_light"
-                    android:text="Nombre de Usuario"
                     android:textAlignment="center"
                     android:textColor="@color/colorText"
                     android:textSize="18sp"
@@ -63,7 +62,6 @@
                     android:hint="Enter your username"
                     android:layout_marginTop="5dp"
                     android:background="@color/colorPopUpBackgroundSubNivel"
-                    android:hint="Escribe tu nombre de usario"
                     android:inputType="textCapWords"
                     android:textColorHint="@color/colorHint"
                     android:fontFamily="@font/quicksand_light"
@@ -80,13 +78,8 @@
                     android:background="@drawable/rounded_yellow_buttons"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
-                    android:background="@drawable/rounded_yellow_buttons"
-                    android:fontFamily="@font/quicksand_light"
-                    android:text="Descripción"
                     android:textAlignment="center"
-                    android:textColor="@color/colorText"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                     />
 
                 <EditText
                     android:id="@+id/textDescripcion"
@@ -94,7 +87,6 @@
                     android:layout_height="wrap_content"
                     android:hint="Description..."
                     android:background="@color/colorPopUpBackgroundSubNivel"
-                    android:hint="Descripción..."
                     android:inputType="textMultiLine"
                     android:textColorHint="@color/colorHint"
                     android:fontFamily="@font/quicksand_light"
@@ -115,9 +107,7 @@
             android:textAlignment="center"
             android:textColor="@color/colorText"
             />
-            android:layout_margin="16dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+
 
             <TextView
                 android:layout_width="100dp"
@@ -125,7 +115,7 @@
                 android:layout_gravity="center"
                 android:background="@drawable/rounded_yellow_buttons"
                 android:fontFamily="@font/quicksand_light"
-                android:text="Tus recetas"
+                android:text="Your Recipes"
                 android:textAlignment="center"
                 android:textColor="@color/colorText"
                 android:textStyle="bold" />
@@ -139,6 +129,5 @@
             android:padding="16dp"
             tools:listitem="@layout/rv_fodd_card" />
 
-    </LinearLayout>
+    </FrameLayout>
 
-</FrameLayout>
