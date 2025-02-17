@@ -53,8 +53,10 @@ public class HomePage extends Fragment {
     private EditText buscarRecetas;
     private ApiInterface apiService;
     private Button btnBuscar;
-    // Nuevo contenedor para las categorías dinámicas
+    // Contenedor para las categorías dinámicas
     private LinearLayout categoriesContainer;
+    // Variable para almacenar la categoría seleccionada actualmente
+    private String selectedCategory = null;
 
     public HomePage() {
     }
@@ -227,7 +229,7 @@ public class HomePage extends Fragment {
         editor.apply();
     }
 
-    // ======== NUEVA SECCIÓN: CATEGORÍAS DINÁMICAS ========
+    // ======== SECCIÓN: CATEGORÍAS DINÁMICAS ========
 
     /**
      * Método para cargar las categorías desde la API usando HttpURLConnection.
@@ -271,6 +273,8 @@ public class HomePage extends Fragment {
 
     /**
      * Agrega dinámicamente cada categoría como un TextView al contenedor.
+     * Al tocar una categoría se pinta con "color_Primary" y las demás con "color_UnselectedButton".
+     * Si se vuelve a pulsar la categoría seleccionada, se deselecciona y se restablece el estado por defecto.
      */
     private void addCategoriesToScrollView(List<Categories.Category> categoryList) {
         // Limpiar el contenedor para evitar duplicados
@@ -281,7 +285,8 @@ public class HomePage extends Fragment {
             textView.setText(category.getCategoryName());
             textView.setTextSize(20);
             textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
-            textView.setTextColor(getResources().getColor(R.color.bottom_nav_color));
+            // Inicialmente, asignamos el color de no seleccionado
+            textView.setTextColor(getResources().getColor(R.color.color_UnselectedButton));
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -290,15 +295,45 @@ public class HomePage extends Fragment {
             params.setMargins(margin, margin, margin, margin);
             textView.setLayoutParams(params);
 
-            // Al hacer clic, se busca recetas por la categoría seleccionada
-            textView.setOnClickListener(v -> fetchRecipesByCategory(category.getCategoryName()));
+            // Al hacer clic: se actualizan los colores y se busca la receta de la categoría seleccionada.
+            // Además, si se pulsa de nuevo la categoría ya seleccionada, se deselecciona.
+            textView.setOnClickListener(v -> {
+                if (selectedCategory != null && selectedCategory.equals(category.getCategoryName())) {
+                    // Si ya estaba seleccionada, se deselecciona.
+                    selectedCategory = null;
+                    // Resetea el color de todos los elementos a "unselected"
+                    for (int i = 0; i < categoriesContainer.getChildCount(); i++) {
+                        View child = categoriesContainer.getChildAt(i);
+                        if (child instanceof TextView) {
+                            ((TextView) child).setTextColor(getResources().getColor(R.color.color_UnselectedButton));
+                        }
+                    }
+                    // Aquí puedes decidir qué hacer al deseleccionar: por ejemplo, volver a cargar un estado por defecto.
+                    // En este ejemplo se carga "chicken" como valor por defecto.
+                    buscarRecetasPorIngrediente("chicken");
+                } else {
+                    // Si se selecciona una nueva categoría, se actualiza la variable y se marcan los colores.
+                    selectedCategory = category.getCategoryName();
+                    // Resetear todos los elementos a "unselected"
+                    for (int i = 0; i < categoriesContainer.getChildCount(); i++) {
+                        View child = categoriesContainer.getChildAt(i);
+                        if (child instanceof TextView) {
+                            ((TextView) child).setTextColor(getResources().getColor(R.color.color_UnselectedButton));
+                        }
+                    }
+                    // Se asigna el color seleccionado al TextView pulsado
+                    textView.setTextColor(getResources().getColor(R.color.color_Priamry));
+                    // Llamamos a la función para obtener las recetas de la categoría seleccionada
+                    fetchRecipesByCategory(category.getCategoryName());
+                }
+            });
 
             categoriesContainer.addView(textView);
         }
     }
 
     /**
-     * Realiza una llamada HTTP para obtener las recetas filtradas por categoría.
+     * Realiza una llamada HTTP para obtener las recetas filtradas por la categoría seleccionada.
      */
     private void fetchRecipesByCategory(final String categoryName) {
         new Thread(() -> {

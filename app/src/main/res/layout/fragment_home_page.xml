@@ -31,7 +31,10 @@
                 android:id="@+id/categoriesContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:divider="?android:attr/dividerHorizontal"
+                android:showDividers="middle"
+                android:dividerPadding="16dp">
                 <!-- Aquí se agregarán dinámicamente los TextViews para cada categoría -->
             </LinearLayout>
         </HorizontalScrollView>
