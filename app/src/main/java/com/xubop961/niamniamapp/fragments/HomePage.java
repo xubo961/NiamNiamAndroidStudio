@@ -1,18 +1,21 @@
 package com.xubop961.niamniamapp.fragments;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Button;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,14 +29,22 @@ import com.xubop961.niamniamapp.R;
 import com.xubop961.niamniamapp.adapters.FoodAdapter;
 import com.xubop961.niamniamapp.api.ApiClient;
 import com.xubop961.niamniamapp.api.ApiInterface;
+import com.xubop961.niamniamapp.api.Categories;
 import com.xubop961.niamniamapp.api.Meals;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-
-import java.lang.reflect.Type;
-import java.util.List;
 
 public class HomePage extends Fragment {
 
@@ -42,18 +53,29 @@ public class HomePage extends Fragment {
     private EditText buscarRecetas;
     private ApiInterface apiService;
     private Button btnBuscar;
+    // Contenedor para las categorías dinámicas
+    private LinearLayout categoriesContainer;
+    // Variable para almacenar la categoría seleccionada actualmente
+    private String selectedCategory = null;
 
     public HomePage() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflamos el layout del fragment (asegúrate de haber modificado fragment_home_page.xml)
         View view = inflater.inflate(R.layout.fragment_home_page, container, false);
 
         recyclerView = view.findViewById(R.id.recycler_view);
         buscarRecetas = view.findViewById(R.id.buscarRecetas);
         btnBuscar = view.findViewById(R.id.btnBuscar);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+
+        // Obtenemos el contenedor de categorías que debe existir en el XML (dentro del HorizontalScrollView)
+        categoriesContainer = view.findViewById(R.id.categoriesContainer);
+
+        // Cargamos las categorías dinámicamente
+        loadCategories();
 
         Retrofit retrofit = ApiClient.getClient();
         apiService = retrofit.create(ApiInterface.class);
@@ -67,8 +89,7 @@ public class HomePage extends Fragment {
             }
         });
 
-        //  Establecido que salga CHICKEN por defecto
-        //  Tal vez se cambie en un futuro ;) jejeje
+        // Se establece "chicken" por defecto
         buscarRecetasPorIngrediente("chicken");
 
         return view;
@@ -176,8 +197,6 @@ public class HomePage extends Fragment {
         });
     }
 
-
-
     private boolean estaEnFavoritos(Meals.Meal meal) {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("FAVORITOS", Context.MODE_PRIVATE);
         Gson gson = new Gson();
@@ -234,5 +253,162 @@ public class HomePage extends Fragment {
         editor.apply();
     }
 
-}
+    // ======== SECCIÓN: CATEGORÍAS DINÁMICAS ========
 
+    /**
+     * Método para cargar las categorías desde la API usando HttpURLConnection.
+     */
+    private void loadCategories() {
+        new Thread(() -> {
+            try {
+                URL url = new URL("https://www.themealdb.com/api/json/v1/1/categories.php");
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                connection.setConnectTimeout(10000);
+                connection.setReadTimeout(10000);
+
+                int responseCode = connection.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStream inputStream = connection.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                    StringBuilder sb = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        sb.append(line);
+                    }
+                    reader.close();
+
+                    Gson gson = new Gson();
+                    final Categories categories = gson.fromJson(sb.toString(), Categories.class);
+
+                    // Actualizamos la UI en el hilo principal
+                    if (getActivity() != null) {
+                        getActivity().runOnUiThread(() ->
+                                addCategoriesToScrollView(categories.getCategories())
+                        );
+                    }
+                }
+                connection.disconnect();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    /**
+     * Agrega dinámicamente cada categoría como un TextView al contenedor.
+     * Al tocar una categoría se pinta con "color_Primary" y las demás con "color_UnselectedButton".
+     * Si se vuelve a pulsar la categoría seleccionada, se deselecciona y se restablece el estado por defecto.
+     */
+    private void addCategoriesToScrollView(List<Categories.Category> categoryList) {
+        // Limpiar el contenedor para evitar duplicados
+        categoriesContainer.removeAllViews();
+
+        for (final Categories.Category category : categoryList) {
+            TextView textView = new TextView(getContext());
+            textView.setText(category.getCategoryName());
+            textView.setTextSize(20);
+            textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
+            // Inicialmente, asignamos el color de no seleccionado
+            textView.setTextColor(getResources().getColor(R.color.color_UnselectedButton));
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            int margin = 7;
+            params.setMargins(margin, margin, margin, margin);
+            textView.setLayoutParams(params);
+
+            // Al hacer clic: se actualizan los colores y se busca la receta de la categoría seleccionada.
+            // Además, si se pulsa de nuevo la categoría ya seleccionada, se deselecciona.
+            textView.setOnClickListener(v -> {
+                if (selectedCategory != null && selectedCategory.equals(category.getCategoryName())) {
+                    // Si ya estaba seleccionada, se deselecciona.
+                    selectedCategory = null;
+                    // Resetea el color de todos los elementos a "unselected"
+                    for (int i = 0; i < categoriesContainer.getChildCount(); i++) {
+                        View child = categoriesContainer.getChildAt(i);
+                        if (child instanceof TextView) {
+                            ((TextView) child).setTextColor(getResources().getColor(R.color.color_UnselectedButton));
+                        }
+                    }
+                    // Aquí puedes decidir qué hacer al deseleccionar: por ejemplo, volver a cargar un estado por defecto.
+                    // En este ejemplo se carga "chicken" como valor por defecto.
+                    buscarRecetasPorIngrediente("chicken");
+                } else {
+                    // Si se selecciona una nueva categoría, se actualiza la variable y se marcan los colores.
+                    selectedCategory = category.getCategoryName();
+                    // Resetear todos los elementos a "unselected"
+                    for (int i = 0; i < categoriesContainer.getChildCount(); i++) {
+                        View child = categoriesContainer.getChildAt(i);
+                        if (child instanceof TextView) {
+                            ((TextView) child).setTextColor(getResources().getColor(R.color.color_UnselectedButton));
+                        }
+                    }
+                    // Se asigna el color seleccionado al TextView pulsado
+                    textView.setTextColor(getResources().getColor(R.color.color_Priamry));
+                    // Llamamos a la función para obtener las recetas de la categoría seleccionada
+                    fetchRecipesByCategory(category.getCategoryName());
+                }
+            });
+
+            categoriesContainer.addView(textView);
+        }
+    }
+
+    /**
+     * Realiza una llamada HTTP para obtener las recetas filtradas por la categoría seleccionada.
+     */
+    private void fetchRecipesByCategory(final String categoryName) {
+        new Thread(() -> {
+            try {
+                String urlString = "https://www.themealdb.com/api/json/v1/1/filter.php?c=" +
+                        URLEncoder.encode(categoryName, "UTF-8");
+                URL url = new URL(urlString);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                connection.setConnectTimeout(10000);
+                connection.setReadTimeout(10000);
+
+                int responseCode = connection.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStream inputStream = connection.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                    StringBuilder sb = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        sb.append(line);
+                    }
+                    reader.close();
+
+                    Gson gson = new Gson();
+                    final Meals meals = gson.fromJson(sb.toString(), Meals.class);
+
+                    // Actualizamos la UI en el hilo principal para mostrar las recetas
+                    if (getActivity() != null) {
+                        getActivity().runOnUiThread(() ->
+                                updateRecipesUI(meals.getMeals())
+                        );
+                    }
+                }
+                connection.disconnect();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    /**
+     * Actualiza el RecyclerView para mostrar las recetas obtenidas de la categoría seleccionada.
+     */
+    private void updateRecipesUI(List<Meals.Meal> mealsList) {
+        if (mealsList != null && !mealsList.isEmpty()) {
+            adapter = new FoodAdapter(getContext(), mealsList, meal -> {
+                mostrarDialogoReceta(meal);
+            });
+            recyclerView.setAdapter(adapter);
+        } else {
+            Toast.makeText(getContext(), "No se encontraron recetas para esta categoría", Toast.LENGTH_SHORT).show();
+        }
+    }
+}

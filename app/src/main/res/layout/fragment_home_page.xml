@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:paddingTop="25dp"
-            android:text="Bienvenido, Name"
+            android:text="Welcome, Name"
             android:textSize="30dp"
             android:textStyle="bold"
             android:fontFamily="@font/quicksand_light"/>
@@ -28,61 +28,14 @@
             android:paddingTop="25dp">
 
             <LinearLayout
+                android:id="@+id/categoriesContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/principales"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="7dp"
-                    android:text="Principales"
-                    android:textColor="@color/bottom_nav_color"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/quicksand_light"/>
-
-                <TextView
-                    android:id="@+id/guarniciones"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="7dp"
-                    android:text="Guarniciones"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/quicksand_light"/>
-
-                <TextView
-                    android:id="@+id/postres"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="7dp"
-                    android:text="Postres"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/quicksand_light"/>
-
-                <TextView
-                    android:id="@+id/sopas"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="7dp"
-                    android:text="Sopas"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/quicksand_light"/>
-
-                <TextView
-                    android:id="@+id/otros"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="7dp"
-                    android:text="Otros"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/quicksand_light"/>
-
+                android:orientation="horizontal"
+                android:divider="?android:attr/dividerHorizontal"
+                android:showDividers="middle"
+                android:dividerPadding="16dp">
+                <!-- Aquí se agregarán dinámicamente los TextViews para cada categoría -->
             </LinearLayout>
         </HorizontalScrollView>
 
@@ -103,7 +56,7 @@
                 android:drawableStart="@drawable/baseline_search_24"
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/quicksand_light"
-                android:hint="Buscar..."
+                android:hint="Search..."
                 android:paddingStart="40dp"
                 android:textSize="16sp"
                 android:gravity="center_vertical"
@@ -114,7 +67,7 @@
                 android:id="@+id/btnBuscar"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:text="Buscar"
+                android:text="Search"
                 android:textSize="16sp"
                 android:textColor="@color/colorText"
                 android:backgroundTint="@color/colorYellowButtons"
@@ -135,44 +88,3 @@
     </LinearLayout>
 
 </FrameLayout>
-
-
-    <!--                <Button-->
-    <!--                    android:id="@+id/principales"-->
-    <!--                    android:layout_width="wrap_content"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_weight="1"-->
-    <!--                    android:text="Button"-->
-    <!--                    android:layout_margin="5dp"/>-->
-
-    <!--                <Button-->
-    <!--                    android:id="@+id/guarniciones"-->
-    <!--                    android:layout_width="wrap_content"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_weight="1"-->
-    <!--                    android:text="Button"-->
-    <!--                    android:layout_margin="5dp"/>-->
-
-    <!--                <Button-->
-    <!--                    android:id="@+id/postres"-->
-    <!--                    android:layout_width="wrap_content"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_weight="1"-->
-    <!--                    android:text="Button"-->
-    <!--                    android:layout_margin="5dp"/>-->
-
-    <!--                <Button-->
-    <!--                    android:id="@+id/sopas"-->
-    <!--                    android:layout_width="wrap_content"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_weight="1"-->
-    <!--                    android:text="Button"-->
-    <!--                    android:layout_margin="5dp"/>-->
-
-    <!--                <Button-->
-    <!--                    android:id="@+id/otros"-->
-    <!--                    android:layout_width="wrap_content"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:layout_weight="1"-->
-    <!--                    android:text="Button"-->
-    <!--                    android:layout_margin="5dp"/>-->
