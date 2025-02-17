@@ -72,7 +72,7 @@
                     android:background="@android:color/transparent"
                 app:elevation="0dp"
                 style="@style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface"
-                app:itemTextColor="@color/white"
+                app:itemTextColor="#000000"
                 app:itemIconTint="@color/bottom_nav_color"
                 app:itemBackground="@drawable/bottom_nav_item_background"
                 app:menu="@menu/bottom_nav_login"

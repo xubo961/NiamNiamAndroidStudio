@@ -69,7 +69,7 @@ public class HomePage extends Fragment {
         recyclerView = view.findViewById(R.id.recycler_view);
         buscarRecetas = view.findViewById(R.id.buscarRecetas);
         btnBuscar = view.findViewById(R.id.btnBuscar);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
         // Obtenemos el contenedor de categorías que debe existir en el XML (dentro del HorizontalScrollView)
         categoriesContainer = view.findViewById(R.id.categoriesContainer);
@@ -122,55 +122,79 @@ public class HomePage extends Fragment {
     }
 
     private void mostrarDialogoReceta(Meals.Meal meal) {
-        LayoutInflater inflater = LayoutInflater.from(getContext());
-        View dialogView = inflater.inflate(R.layout.dialog_food_details, null);
+        // Llamada para obtener los detalles de la receta por su mealId
+        apiService.getMealDetails(meal.getMealId()).enqueue(new Callback<Meals>() {
+            @Override
+            public void onResponse(@NonNull Call<Meals> call, @NonNull Response<Meals> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Meals.Meal recipeDetails = response.body().getMeals().get(0);  // Receta obtenida
 
-        ImageView imageView = dialogView.findViewById(R.id.dialogFoodImage);
-        TextView textViewNombre = dialogView.findViewById(R.id.dialogFoodName);
-        TextView textViewInstrucciones = dialogView.findViewById(R.id.dialogFoodInstruction);
+                    // Ahora mostramos los detalles de la receta
+                    LayoutInflater inflater = LayoutInflater.from(getContext());
+                    View dialogView = inflater.inflate(R.layout.dialog_food_details, null);
 
-        ImageButton btnAddToFavorites = dialogView.findViewById(R.id.btnAddToFavorites);
-        ImageButton btnRemoveFromFavorites = dialogView.findViewById(R.id.btnRemoveFromFavorites);
+                    ImageView imageView = dialogView.findViewById(R.id.dialogFoodImage);
+                    TextView textViewNombre = dialogView.findViewById(R.id.dialogFoodName);
+                    TextView textViewInstrucciones = dialogView.findViewById(R.id.dialogFoodInstruction);
 
-        textViewNombre.setText(meal.getMealName());
+                    ImageButton btnAddToFavorites = dialogView.findViewById(R.id.btnAddToFavorites);
+                    ImageButton btnRemoveFromFavorites = dialogView.findViewById(R.id.btnRemoveFromFavorites);
 
-        Glide.with(getContext())
-                .load(meal.getMealImageUrl())
-                .into(imageView);
+                    textViewNombre.setText(recipeDetails.getMealName());
 
-        String instrucciones = meal.getInstructions();
-        if (instrucciones != null && !instrucciones.isEmpty()) {
-            textViewInstrucciones.setText(instrucciones);
-        } else {
-            textViewInstrucciones.setText("No hay instrucciones disponibles.");
-        }
+                    // Cargar la imagen de la receta
+                    Glide.with(getContext())
+                            .load(recipeDetails.getMealImageUrl())
+                            .into(imageView);
 
-        if (estaEnFavoritos(meal)) {
-            btnAddToFavorites.setVisibility(View.GONE);
-            btnRemoveFromFavorites.setVisibility(View.VISIBLE);
-        } else {
-            btnAddToFavorites.setVisibility(View.VISIBLE);
-            btnRemoveFromFavorites.setVisibility(View.GONE);
-        }
+                    // Mostrar instrucciones de la receta
+                    String instrucciones = recipeDetails.getInstructions();
+                    if (instrucciones != null && !instrucciones.isEmpty()) {
+                        textViewInstrucciones.setText(instrucciones);
+                    } else {
+                        textViewInstrucciones.setText("No hay instrucciones disponibles.");
+                    }
 
-        btnAddToFavorites.setOnClickListener(v -> {
-            guardarEnFavoritos(meal);
-            Toast.makeText(getContext(), "Añadido a Favoritos", Toast.LENGTH_SHORT).show();
-            btnAddToFavorites.setVisibility(View.GONE);
-            btnRemoveFromFavorites.setVisibility(View.VISIBLE);
+                    // Gestionar visibilidad de los botones de favoritos
+                    if (estaEnFavoritos(recipeDetails)) {
+                        btnAddToFavorites.setVisibility(View.GONE);  // Ocultar "Añadir a Favoritos"
+                        btnRemoveFromFavorites.setVisibility(View.VISIBLE);  // Mostrar "Quitar de Favoritos"
+                    } else {
+                        btnAddToFavorites.setVisibility(View.VISIBLE);  // Mostrar "Añadir a Favoritos"
+                        btnRemoveFromFavorites.setVisibility(View.GONE);  // Ocultar "Quitar de Favoritos"
+                    }
+
+                    // Gestión de favoritos
+                    btnAddToFavorites.setOnClickListener(v -> {
+                        guardarEnFavoritos(recipeDetails);
+                        Toast.makeText(getContext(), "Añadido a Favoritos", Toast.LENGTH_SHORT).show();
+                        btnAddToFavorites.setVisibility(View.GONE);
+                        btnRemoveFromFavorites.setVisibility(View.VISIBLE);
+                    });
+
+                    btnRemoveFromFavorites.setOnClickListener(v -> {
+                        quitarDeFavoritos(recipeDetails);
+                        Toast.makeText(getContext(), "Quitado de Favoritos", Toast.LENGTH_SHORT).show();
+                        btnAddToFavorites.setVisibility(View.VISIBLE);
+                        btnRemoveFromFavorites.setVisibility(View.GONE);
+                    });
+
+                    // Mostrar el diálogo
+                    new MaterialAlertDialogBuilder(getContext())
+                            .setView(dialogView)
+                            .setPositiveButton("Cerrar", (dialog, which) -> dialog.dismiss())
+                            .show();
+
+                } else {
+                    Toast.makeText(getContext(), "Error al obtener los detalles de la receta", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Meals> call, @NonNull Throwable t) {
+                Toast.makeText(getContext(), "Error de conexión", Toast.LENGTH_SHORT).show();
+            }
         });
-
-        btnRemoveFromFavorites.setOnClickListener(v -> {
-            quitarDeFavoritos(meal);
-            Toast.makeText(getContext(), "Quitado de Favoritos", Toast.LENGTH_SHORT).show();
-            btnAddToFavorites.setVisibility(View.VISIBLE);
-            btnRemoveFromFavorites.setVisibility(View.GONE);
-        });
-
-        new MaterialAlertDialogBuilder(getContext())
-                .setView(dialogView)
-                .setPositiveButton("Cerrar", (dialog, which) -> dialog.dismiss())
-                .show();
     }
 
     private boolean estaEnFavoritos(Meals.Meal meal) {

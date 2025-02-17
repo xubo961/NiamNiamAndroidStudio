@@ -53,17 +53,37 @@
         android:layout_marginTop="10dp"
         android:text="Log in"
         android:backgroundTint="@color/color_Priamry"
+        android:fontFamily="@font/quicksand_light"
+        android:textStyle="bold"
         />
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="@id/loginButton"
         app:layout_constraintStart_toStartOf="@id/loginButton"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton"
-        android:text="Dont have an account? Sign up"
-        android:textColor="@color/colorText"
-        android:onClick="onLoginClick"
-        />
+        app:layout_constraintTop_toBottomOf="@id/loginButton"
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/firstPartText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Don't have an account? "
+            android:textColor="@color/colorText"
+            android:fontFamily="@font/quicksand_light"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/signUpText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign up"
+            android:textColor="@android:color/holo_red_dark"
+            android:fontFamily="@font/quicksand_light"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -45,14 +45,15 @@
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:text="Username"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/rounded_yellow_buttons"
+                    android:fontFamily="@font/quicksand_light"
+                    android:text="Nombre de Usuario"
                     android:textAlignment="center"
                     android:textColor="@color/colorText"
                     android:textSize="18sp"
-                    android:fontFamily="@font/quicksand_light"
                     android:textStyle="bold"
-                    android:background="@drawable/rounded_yellow_buttons"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
                     />
 
                 <EditText
@@ -60,11 +61,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Enter your username"
-                    android:inputType="textCapWords"
-                    android:textColorHint="@color/colorHint"
                     android:layout_marginTop="5dp"
                     android:background="@color/colorPopUpBackgroundSubNivel"
-                    />
+                    android:hint="Escribe tu nombre de usario"
+                    android:inputType="textCapWords"
+                    android:textColorHint="@color/colorHint"
+                    android:fontFamily="@font/quicksand_light"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:layout_width="120dp"
@@ -77,29 +80,32 @@
                     android:background="@drawable/rounded_yellow_buttons"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
+                    android:background="@drawable/rounded_yellow_buttons"
+                    android:fontFamily="@font/quicksand_light"
+                    android:text="Descripción"
                     android:textAlignment="center"
-                    />
+                    android:textColor="@color/colorText"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/textDescripcion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Description..."
+                    android:background="@color/colorPopUpBackgroundSubNivel"
+                    android:hint="Descripción..."
                     android:inputType="textMultiLine"
                     android:textColorHint="@color/colorHint"
-                    android:background="@color/colorPopUpBackgroundSubNivel"
-                    />
+                    android:fontFamily="@font/quicksand_light"
+                    android:textStyle="bold"
+                    android:minLines="4"/>
             </LinearLayout>
+
         </androidx.cardview.widget.CardView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="100dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Your Recipes"
             android:layout_gravity="center"
@@ -109,10 +115,30 @@
             android:textAlignment="center"
             android:textColor="@color/colorText"
             />
+            android:layout_margin="16dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/rounded_yellow_buttons"
+                android:fontFamily="@font/quicksand_light"
+                android:text="Tus recetas"
+                android:textAlignment="center"
+                android:textColor="@color/colorText"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            tools:listitem="@layout/rv_fodd_card" />
 
     </LinearLayout>
 
-
-
-    </LinearLayout>
 </FrameLayout>

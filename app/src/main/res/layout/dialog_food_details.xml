@@ -3,52 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
-
-    <ImageView
-        android:id="@+id/dialogFoodImage"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:scaleType="centerCrop"
-        android:contentDescription="Imagen de la comida" />
-
-    <TextView
-        android:id="@+id/dialogFoodName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:text="Nombre de la comida"
-        android:fontFamily="@font/quicksand_light" />
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fillViewport="true">
-
-        <TextView
-            android:id="@+id/dialogFoodInstruction"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:fontFamily="@font/quicksand_light"
-            android:textStyle="normal"
-            android:textColor="@color/colorText"
-            android:padding="8dp"
-            android:text="Instrucciones" />
-
-    </ScrollView>
+    android:padding="16dp"
+    android:background="@color/color_Background">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        >
 
         <ImageButton
             android:id="@+id/btnAddToFavorites"
@@ -59,7 +24,7 @@
             android:padding="8dp"
             android:src="@drawable/baseline_favorite_24"
             android:contentDescription="Añadir a favoritos"
-            app:tint="#000000" />
+            app:tint="@color/color_Priamry" />
 
         <Space
             android:layout_width="32dp"
@@ -74,7 +39,48 @@
             android:padding="8dp"
             android:src="@drawable/baseline_clear_24"
             android:contentDescription="Quitar de favoritos"
-            app:tint="#000000"/>
+            app:tint="@color/color_Priamry"/>
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/dialogFoodImage"
+        android:layout_width="280dp"
+        android:layout_height="220dp"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        android:contentDescription="Imagen de la comida" />
+
+    <TextView
+        android:id="@+id/dialogFoodName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:text="Nombre de la comida"
+        android:fontFamily="@font/quicksand_bold"
+        android:textColor="@color/colorText" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:fillViewport="true"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/dialogFoodInstruction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:fontFamily="@font/quicksand_light"
+            android:textColor="@color/colorText"
+            android:text="Instrucciones"
+            android:padding="8dp"
+            android:textAlignment="center"
+            android:textStyle="bold"/>
+
+    </ScrollView>
+
 
 </LinearLayout>

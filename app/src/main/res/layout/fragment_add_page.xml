@@ -116,7 +116,9 @@
                         android:hint="Write the recipe name"
                         android:inputType="textCapWords"
                         android:textColorHint="@color/colorHint"
-                        android:background="@color/colorPopUpBackgroundSubNivel"/>
+                        android:background="@color/colorPopUpBackgroundSubNivel"
+                        android:fontFamily="@font/quicksand_light"
+                        android:textStyle="bold"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -141,6 +143,8 @@
                         android:layout_height="wrap_content"
                         android:hint="Select Ingredients"
                         android:layout_centerInParent="true"
+                        android:fontFamily="@font/quicksand_light"
+                        android:textStyle="bold"
                         />
                     
                     <ImageView
@@ -187,7 +191,9 @@
                         android:inputType="textMultiLine"
                         android:minLines="6"
                         android:textColorHint="@color/colorHint"
-                        android:background="@color/colorPopUpBackgroundSubNivel"/>
+                        android:background="@color/colorPopUpBackgroundSubNivel"
+                        android:fontFamily="@font/quicksand_light"
+                        android:textStyle="bold"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 

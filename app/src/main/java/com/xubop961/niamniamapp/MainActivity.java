@@ -1,10 +1,14 @@
 package com.xubop961.niamniamapp;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.xubop961.niamniamapp.fragments.AddPage;
@@ -38,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private final NavigationBarView.OnItemSelectedListener navListener =
             item -> {
                 int itemId = item.getItemId();
-                Fragment selectedFragment = null;
+                Fragment selectedFragment;
 
                 if (itemId == R.id.home) {
                     selectedFragment = new HomePage();
@@ -68,14 +72,18 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.configuracionButton) {
             Toast toast = Toast.makeText(this, "Botón Configuración", Toast.LENGTH_SHORT);
             toast.show();
-        } else if (id == R.id.acercadeButton) {
-            Toast toast = Toast.makeText(this, "Botón acerca de", Toast.LENGTH_SHORT);
-            toast.show();
+        } else if (id == R.id.acercadeBo) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("https://github.com/xubo961/"));
+            startActivity(intent);
+        } else if (id == R.id.acercadeSanti) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("https://github.com/SNgomez27"));
+            startActivity(intent);
         } else if (id == R.id.cerrarSeionButton) {
-            Toast toast = Toast.makeText(this, "Botón cerrar sesión", Toast.LENGTH_SHORT);
-            toast.show();
+            Intent intent = new Intent(MainActivity.this, Login.class);
+            startActivity(intent);
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
