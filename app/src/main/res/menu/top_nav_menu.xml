@@ -8,10 +8,8 @@
         app:showAsAction="never"
         />
     <item
-        android:id="@+id/acercadeButton"
-        android:title="About"
         android:id="@+id/acercadeBo"
-        android:title="Acerca de Bo"
+        android:title="About de Bo"
         app:showAsAction="never"
         />
     <item
