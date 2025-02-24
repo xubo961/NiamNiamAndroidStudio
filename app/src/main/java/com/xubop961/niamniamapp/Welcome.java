@@ -6,45 +6,57 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-
-//Lo que está comentado es para una prueba, de cambiar a esta actividad a una diferente
-//pero da un error que hay que solucionar :D
 public class Welcome extends AppCompatActivity {
 
-    Button loginButton =findViewById(R.id.loginButton);
+    Button loginButton;
+    TextView signUpText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+        // Habilita el modo EdgeToEdge
         setContentView(R.layout.activity_welcome);
+
+        // Inicializa los componentes
+        loginButton = findViewById(R.id.loginButton);
+        signUpText = findViewById(R.id.signUpText);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
+        // Listener para el botón de login
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                launchLogin();
+            }
+        });
 
-      loginButton.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-              launchLogin();
-          }
-      });
+        // Listener para el TextView de sign up
+        signUpText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchRegisterInLogin();
+            }
+        });
+    }
 
+    public void launchLogin() {
+        Intent intent = new Intent(Welcome.this, Login.class);
+        startActivity(intent);
+    }
 
-}
-
-  public void launchLogin() {
-      Intent intent = new Intent(Welcome.this, Login.class);
-      startActivity(intent);
-
-
-  }
+    private void launchRegisterInLogin() {
+        Intent intent = new Intent(Welcome.this, Login.class);
+        intent.putExtra("open_register", true);
+        startActivity(intent);
+    }
 }

@@ -1,5 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- bottom_nav_item_background.xml -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@color/color_Priamry" android:state_checked="true"/> <!-- Rojo cuando está seleccionado -->
-    <item android:drawable="@color/color_UnselectedButton"/> <!-- Color normal -->
+    <!-- Fondo si está seleccionado -->
+    <item android:state_checked="true"
+        android:drawable="@drawable/nav_item_selected" />
+
+    <!-- Fondo si está presionado -->
+    <!-- Si NO quieres un color distinto al presionar, pon el mismo drawable -->
+    <item android:state_pressed="true"
+        android:drawable="@drawable/nav_item_unselected" />
+
+    <!-- Fondo por defecto -->
+    <item android:drawable="@drawable/nav_item_unselected" />
 </selector>

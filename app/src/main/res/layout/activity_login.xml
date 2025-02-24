@@ -63,20 +63,23 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/bottom_nav_background"
-                android:clipToOutline="true">
+                android:clipToOutline="true"
+                app:itemRippleColor="@color/color_Priamry"    >
 
                 <com.google.android.material.bottomnavigation.BottomNavigationView
                     android:id="@+id/bottom_nav"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:background="@android:color/transparent"
-                app:elevation="0dp"
-                style="@style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface"
-                app:itemTextColor="#000000"
-                app:itemIconTint="@color/bottom_nav_color"
-                app:itemBackground="@drawable/bottom_nav_item_background"
-                app:menu="@menu/bottom_nav_login"
-                app:labelVisibilityMode="labeled"/>
+                    android:layout_width="250dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bottom_nav_background"
+                    app:elevation="0dp"
+                    app:menu="@menu/bottom_nav_login"
+                    app:labelVisibilityMode="labeled"
+                    app:itemBackground="@drawable/bottom_nav_item_background"
+                    app:itemIconTint="@color/bottom_nav_icon_color"
+                    app:itemTextColor="@color/bottom_nav_icon_color"
+                                    />
+
             </FrameLayout>
 
 

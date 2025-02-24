@@ -55,17 +55,7 @@
                     android:textStyle="bold"
                     />
 
-                <EditText
-                    android:id="@+id/textoNombreUsuario"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Enter your username"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/colorPopUpBackgroundSubNivel"
-                    android:inputType="textCapWords"
-                    android:textColorHint="@color/colorHint"
-                    android:fontFamily="@font/quicksand_light"
-                    android:textStyle="bold"/>
+
 
                 <TextView
                     android:layout_width="120dp"
@@ -120,8 +110,6 @@
                 android:textColor="@color/colorText"
                 android:textStyle="bold" />
 
-        </LinearLayout>
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
@@ -129,5 +117,7 @@
             android:padding="16dp"
             tools:listitem="@layout/rv_fodd_card" />
 
-    </FrameLayout>
+    </LinearLayout>
+
+</FrameLayout>
 

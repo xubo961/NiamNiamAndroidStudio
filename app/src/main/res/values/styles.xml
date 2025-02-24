@@ -4,4 +4,7 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
+    <style name="Theme.MyApp.NoRipple" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorControlHighlight">@android:color/transparent</item>
+    </style>
 </resources>
