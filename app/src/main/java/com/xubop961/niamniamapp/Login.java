@@ -15,17 +15,15 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login); // Asegúrate de que este layout contenga el contenedor y la BottomNavigationView
+        setContentView(R.layout.activity_login);
 
         BottomNavigationView bottomNavView = findViewById(R.id.bottom_nav);
 
         // Elimina el efecto ripple estableciendo el color a null
         bottomNavView.setItemRippleColor(null);
 
-        // Verifica si se ha pasado el extra "open_register" desde Welcome
         boolean openRegister = getIntent().getBooleanExtra("open_register", false);
 
-        // Muestra el fragmento inicial según el extra recibido
         if (openRegister) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, new RegisterFragment())
