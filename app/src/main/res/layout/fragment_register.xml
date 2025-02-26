@@ -32,12 +32,13 @@
                 tools:layout_editor_absoluteX="20dp"
                 tools:layout_editor_absoluteY="16dp">
 
+                <!-- Campo Name -->
                 <com.google.android.material.textfield.TextInputLayout
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="60dp"
-                    android:hint="Name">
+                    android:hint="Name"
+                    app:boxBackgroundMode="none">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/inputName"
@@ -48,16 +49,19 @@
                         android:importantForAccessibility="yes"
                         android:inputType="textPersonName"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:background="@drawable/edit_text_underline" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <!-- Campo Email -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/quicksand_light"
                     android:hint="Email"
-                    android:textStyle="bold">
+                    android:textStyle="bold"
+                    app:boxBackgroundMode="none">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/inputEmail"
@@ -68,14 +72,17 @@
                         android:inputType="textEmailAddress"
                         android:textSize="18sp"
                         android:fontFamily="@font/quicksand_light"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold"
+                        android:background="@drawable/edit_text_underline" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <!-- Campo Password -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:hint="Password">
+                    android:hint="Password"
+                    app:boxBackgroundMode="none">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/inputPassword"
@@ -86,14 +93,17 @@
                         android:inputType="textPassword"
                         android:textSize="18sp"
                         android:fontFamily="@font/quicksand_light"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold"
+                        android:background="@drawable/edit_text_underline" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <!-- Campo Repeat Password -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:hint="Repeat Password">
+                    android:hint="Repeat Password"
+                    app:boxBackgroundMode="none">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/inputRepeatPassword"
@@ -104,7 +114,8 @@
                         android:inputType="textPassword"
                         android:textSize="18sp"
                         android:fontFamily="@font/quicksand_light"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold"
+                        android:background="@drawable/edit_text_underline" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
