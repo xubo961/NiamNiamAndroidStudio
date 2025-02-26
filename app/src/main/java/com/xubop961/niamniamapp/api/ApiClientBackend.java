@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClientBackend {
     //  misma IP de la base de datos, pero el puerto controlado para que sea el del servidor backend
-    public static String BASE_URL_BACKEND = "http://192.168.73.127:8080/";
+    public static String BASE_URL_BACKEND = "http://192.168.73.127:8080/api/";
 
     private static Retrofit retrofit;
 

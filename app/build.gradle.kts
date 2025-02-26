@@ -32,6 +32,7 @@ android {
 }
 
 dependencies {
+    implementation("com.android.volley:volley:1.2.1")
     implementation ("androidx.navigation:navigation-fragment-ktx:2.8.6")
     implementation ("androidx.navigation:navigation-ui-ktx:2.8.6")
     implementation ("com.google.android.material:material:1.8.0")
