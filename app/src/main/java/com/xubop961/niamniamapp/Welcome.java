@@ -44,7 +44,7 @@ public class Welcome extends AppCompatActivity {
         signUpText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                launchRegisterInLogin(R.id.nav_register);
+                launchRegisterInLogin();
             }
         });
     }

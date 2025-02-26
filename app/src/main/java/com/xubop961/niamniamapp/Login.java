@@ -19,12 +19,10 @@ public class Login extends AppCompatActivity {
 
         BottomNavigationView bottomNavView = findViewById(R.id.bottom_nav);
 
-        // Cargar el LoginFragment de forma predeterminada si es el primer arranque
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, new LoginFragment())
                     .commit();
-            // Si usas BottomNavigationView, puedes seleccionar el ítem correspondiente:
             bottomNavView.setSelectedItemId(R.id.nav_login);
         }
 

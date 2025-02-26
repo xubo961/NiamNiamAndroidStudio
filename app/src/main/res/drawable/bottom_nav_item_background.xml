@@ -5,7 +5,6 @@
         android:drawable="@drawable/nav_item_selected" />
 
     <!-- Fondo si está presionado -->
-    <!-- Si NO quieres un color distinto al presionar, pon el mismo drawable -->
     <item android:state_pressed="true"
         android:drawable="@drawable/nav_item_unselected" />
 
