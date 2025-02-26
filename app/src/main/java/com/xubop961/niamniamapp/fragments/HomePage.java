@@ -63,8 +63,14 @@ public class HomePage extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflamos el layout del fragment (asegúrate de haber modificado fragment_home_page.xml)
+        // Inflamos el layout del fragment
         View view = inflater.inflate(R.layout.fragment_home_page, container, false);
+
+        // Actualizamos el TextView de bienvenida con el nombre del usuario
+        TextView textWelcome = view.findViewById(R.id.textWelcome);
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("niamniam_preferences", Context.MODE_PRIVATE);
+        String loggedName = sharedPreferences.getString("logged_in_name", "Name");
+        textWelcome.setText("Welcome, " + loggedName);
 
         recyclerView = view.findViewById(R.id.recycler_view);
         buscarRecetas = view.findViewById(R.id.buscarRecetas);

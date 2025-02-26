@@ -1,24 +1,25 @@
 package com.xubop961.niamniamapp.fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import com.google.android.material.textfield.TextInputEditText;
 import com.xubop961.niamniamapp.MainActivity;
 import com.xubop961.niamniamapp.R;
 
-
 public class LoginFragment extends Fragment {
 
+    private static final String TAG = "LoginFragment";
     private TextInputEditText editEmail, editPassword;
     private Button btnLogin;
 
@@ -43,6 +44,7 @@ public class LoginFragment extends Fragment {
         // Configurar evento del botón
         btnLogin.setOnClickListener(v -> loginUser());
     }
+
     private void loginUser() {
         String email = editEmail.getText().toString().trim();
         String password = editPassword.getText().toString().trim();
@@ -52,17 +54,49 @@ public class LoginFragment extends Fragment {
             return;
         }
 
-        // Verificar si las credenciales son correctas
-        if (email.equals("123") && password.equals("123")) {
-            Toast.makeText(getContext(), "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
+        // Acceder a SharedPreferences
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("niamniam_preferences", Context.MODE_PRIVATE);
+        String key = "user_" + email;
+
+        // Comprobar si el usuario existe
+        if (!sharedPreferences.contains(key)) {
+            Toast.makeText(getContext(), "Usuario inexistente, regístrate", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Recuperar los datos del usuario; se asume que se guardaron en el formato "nombre;password"
+        String userData = sharedPreferences.getString(key, "");
+        if (userData.isEmpty()) {
+            Toast.makeText(getContext(), "Datos de usuario no encontrados", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String[] parts = userData.split(";");
+        if (parts.length < 2) {
+            Toast.makeText(getContext(), "Datos de usuario corruptos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String storedName = parts[0];
+        String storedPassword = parts[1];
+
+        if (storedPassword.equals(password)) {
+            Toast.makeText(getContext(), "Inicio de sesión exitoso. Bienvenido " + storedName, Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "Login exitoso: " + storedName + ", Email: " + email);
+
+            //Metodo para guardar el nombre para poder yusarlo en las otras pantallas
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("logged_in_name", storedName);
+            editor.apply();
+
+
 
             // Redirigir a MainActivity
             Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
-            getActivity().finish(); // Finaliza LoginActivity para que no pueda volver al login con el botón de retroceso
-
+            getActivity().finish(); // Evita volver al login con el botón de retroceso
         } else {
-            Toast.makeText(getContext(), "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Contraseña incorrecta", Toast.LENGTH_SHORT).show();
         }
     }
 }

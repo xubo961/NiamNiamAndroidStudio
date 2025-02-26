@@ -3,29 +3,22 @@ package com.xubop961.niamniamapp.fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xubop961.niamniamapp.R;
 import com.xubop961.niamniamapp.adapters.FoodAdapter;
 import com.xubop961.niamniamapp.api.Meals;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class PerfilPage extends Fragment {
 
@@ -35,8 +28,21 @@ public class PerfilPage extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_perfil_page, container, false);
+        // Inflamos el layout del fragmento
+        View view = inflater.inflate(R.layout.fragment_perfil_page, container, false);
+
+        // Recuperamos el TextView de username y le asignamos el nombre del usuario guardado
+        TextView textUsername = view.findViewById(R.id.textUsername);
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("niamniam_preferences", Context.MODE_PRIVATE);
+        String loggedName = sharedPreferences.getString("logged_in_name", "Username");
+        textUsername.setText(loggedName);
+
+        // Aquí podrías inicializar el RecyclerView si lo requieres
+        recyclerView = view.findViewById(R.id.recycler_view); // Asegúrate de tener este id en el XML
+        // Si deseas cargar las recetas favoritas, llama a cargarTusRecetas();
+        // cargarTusRecetas();
+
+        return view;
     }
 
     private void cargarTusRecetas() {
@@ -57,7 +63,8 @@ public class PerfilPage extends Fragment {
         recyclerView.setAdapter(adapter);
     }
 
-    private void mostrarDialogoReceta(Meals.Meal meal) {LayoutInflater inflater = LayoutInflater.from(getContext());
+    private void mostrarDialogoReceta(Meals.Meal meal) {
+        LayoutInflater inflater = LayoutInflater.from(getContext());
         View dialogView = inflater.inflate(R.layout.dialog_food_details, null);
 
         ImageView imageView = dialogView.findViewById(R.id.dialogFoodImage);

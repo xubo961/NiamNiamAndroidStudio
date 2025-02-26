@@ -19,21 +19,11 @@ public class Login extends AppCompatActivity {
 
         BottomNavigationView bottomNavView = findViewById(R.id.bottom_nav);
 
-        // Elimina el efecto ripple estableciendo el color a null
-        bottomNavView.setItemRippleColor(null);
-
-        boolean openRegister = getIntent().getBooleanExtra("open_register", false);
-
-        if (openRegister) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, new RegisterFragment())
-                    .commit();
-            bottomNavView.setSelectedItemId(R.id.nav_register); // Selecciona la opción de registro en la barra de navegación
-        } else {
+        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, new LoginFragment())
                     .commit();
-            bottomNavView.setSelectedItemId(R.id.nav_login); // Selecciona la opción de login por defecto
+            bottomNavView.setSelectedItemId(R.id.nav_login);
         }
 
         // Maneja los clics en la barra de navegación
@@ -45,11 +35,12 @@ public class Login extends AppCompatActivity {
                 selectedFragment = new RegisterFragment();
             }
             if (selectedFragment != null) {
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragment_container, selectedFragment);
-                transaction.commit();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, selectedFragment)
+                        .commit();
             }
             return true;
         });
     }
+
 }

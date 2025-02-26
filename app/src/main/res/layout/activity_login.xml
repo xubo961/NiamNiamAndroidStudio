@@ -63,24 +63,28 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/bottom_nav_background"
-                android:clipToOutline="true"
-                app:itemRippleColor="@color/color_Priamry"    >
+                android:clipToOutline="true">
 
                 <com.google.android.material.bottomnavigation.BottomNavigationView
                     android:id="@+id/bottom_nav"
-                    android:layout_width="250dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/bottom_nav_background"
+                    style="@style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface"
+                    android:layout_width="match_parent"
+                    android:layout_height="34dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@android:color/transparent"
                     app:elevation="0dp"
-                    app:menu="@menu/bottom_nav_login"
-                    app:labelVisibilityMode="labeled"
                     app:itemBackground="@drawable/bottom_nav_item_background"
-                    app:itemIconTint="@color/bottom_nav_icon_color"
-                    app:itemTextColor="@color/bottom_nav_icon_color"
-                                    />
-
+                    app:itemIconTint="@color/bottom_nav_color"
+                    app:itemTextAppearanceActive="@style/BottomNavigationTextAppearance"
+                    app:itemTextAppearanceInactive="@style/BottomNavigationTextAppearance"
+                    app:itemTextColor="#000000"
+                    app:labelVisibilityMode="labeled"
+                    app:menu="@menu/bottom_nav_login" />
             </FrameLayout>
+
+
 
 
 
