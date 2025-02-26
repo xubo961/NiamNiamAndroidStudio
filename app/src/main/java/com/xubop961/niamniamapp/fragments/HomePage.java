@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +38,7 @@ import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -95,30 +95,107 @@ public class HomePage extends Fragment {
         return view;
     }
 
+    // Búsqueda por ingredientes separados (por comas) y obtención de la intersección de resultados
     private void buscarRecetasPorIngrediente(String ingrediente) {
-        apiService.getMealsByIngredient(ingrediente).enqueue(new Callback<Meals>() {
-            @Override
-            public void onResponse(@NonNull Call<Meals> call, @NonNull Response<Meals> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    List<Meals.Meal> meals = response.body().getMeals();
-                    if (meals != null && !meals.isEmpty()) {
-                        adapter = new FoodAdapter(getContext(), meals, meal -> {
-                            mostrarDialogoReceta(meal);
-                        });
-                        recyclerView.setAdapter(adapter);
+        // Separamos los ingredientes ingresados (por ejemplo: "pollo, tomate")
+        String[] ingredientsArray = ingrediente.split(",");
+        List<String> ingredientList = new ArrayList<>();
+        for (String ing : ingredientsArray) {
+            if (!ing.trim().isEmpty()) {
+                ingredientList.add(ing.trim());
+            }
+        }
+
+        if (ingredientList.isEmpty()) {
+            Toast.makeText(getContext(), "Por favor, ingrese al menos un ingrediente", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        final int totalCalls = ingredientList.size();
+        final int[] completedCalls = {0}; // Contador mutable
+        final List<List<Meals.Meal>> results = new ArrayList<>();
+
+        // Realizamos una llamada a la API para cada ingrediente
+        for (String ing : ingredientList) {
+            apiService.getMealsByIngredient(ing).enqueue(new Callback<Meals>() {
+                @Override
+                public void onResponse(@NonNull Call<Meals> call, @NonNull Response<Meals> response) {
+                    List<Meals.Meal> mealsForIngredient;
+                    if (response.isSuccessful() && response.body() != null) {
+                        mealsForIngredient = response.body().getMeals();
                     } else {
-                        Toast.makeText(getContext(), "No se encontraron recetas para este ingrediente", Toast.LENGTH_SHORT).show();
+                        mealsForIngredient = new ArrayList<>();
                     }
-                } else {
-                    Toast.makeText(getContext(), "Error en la respuesta de la API", Toast.LENGTH_SHORT).show();
+                    synchronized (results) {
+                        results.add(mealsForIngredient);
+                    }
+                    synchronized (completedCalls) {
+                        completedCalls[0]++;
+                        if (completedCalls[0] == totalCalls) {
+                            procesarResultados(results);
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<Meals> call, @NonNull Throwable t) {
+                    // En caso de error, agregamos una lista vacía
+                    synchronized (results) {
+                        results.add(new ArrayList<>());
+                    }
+                    synchronized (completedCalls) {
+                        completedCalls[0]++;
+                        if (completedCalls[0] == totalCalls) {
+                            procesarResultados(results);
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    // Procesa los resultados una vez completadas todas las llamadas y actualiza el RecyclerView
+    private void procesarResultados(List<List<Meals.Meal>> results) {
+        List<Meals.Meal> intersection = intersectResults(results);
+        if (!intersection.isEmpty()) {
+            adapter = new FoodAdapter(getContext(), intersection, meal -> {
+                mostrarDialogoReceta(meal);
+            });
+            recyclerView.setAdapter(adapter);
+        } else {
+            Toast.makeText(getContext(), "No se encontraron recetas para los ingredientes seleccionados", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private List<Meals.Meal> intersectResults(List<List<Meals.Meal>> results) {
+        List<Meals.Meal> intersection = new ArrayList<>();
+        if (results == null || results.isEmpty()) {
+            return intersection;
+        }
+        // Utilizamos la primera lista como base
+        List<Meals.Meal> baseList = results.get(0);
+        for (Meals.Meal meal : baseList) {
+            boolean presentInAll = true;
+            // Comprobamos que la receta esté presente en cada una de las demás listas
+            for (int i = 1; i < results.size(); i++) {
+                List<Meals.Meal> list = results.get(i);
+                boolean found = false;
+                for (Meals.Meal m : list) {
+                    if (m.getMealId().equals(meal.getMealId())) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    presentInAll = false;
+                    break;
                 }
             }
-
-            @Override
-            public void onFailure(@NonNull Call<Meals> call, @NonNull Throwable t) {
-                Toast.makeText(getContext(), "Error de conexión", Toast.LENGTH_SHORT).show();
+            if (presentInAll) {
+                intersection.add(meal);
             }
-        });
+        }
+        return intersection;
     }
 
     private void mostrarDialogoReceta(Meals.Meal meal) {
@@ -307,7 +384,7 @@ public class HomePage extends Fragment {
         for (final Categories.Category category : categoryList) {
             TextView textView = new TextView(getContext());
             textView.setText(category.getCategoryName());
-            textView.setTextSize(20);
+            textView.setTextSize(23);
             textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
             // Inicialmente, asignamos el color de no seleccionado
             textView.setTextColor(getResources().getColor(R.color.color_UnselectedButton));
@@ -315,7 +392,7 @@ public class HomePage extends Fragment {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT);
-            int margin = 7;
+            int margin = 15;
             params.setMargins(margin, margin, margin, margin);
             textView.setLayoutParams(params);
 
@@ -332,7 +409,6 @@ public class HomePage extends Fragment {
                             ((TextView) child).setTextColor(getResources().getColor(R.color.color_UnselectedButton));
                         }
                     }
-                    // Aquí puedes decidir qué hacer al deseleccionar: por ejemplo, volver a cargar un estado por defecto.
                     // En este ejemplo se carga "chicken" como valor por defecto.
                     buscarRecetasPorIngrediente("chicken");
                 } else {

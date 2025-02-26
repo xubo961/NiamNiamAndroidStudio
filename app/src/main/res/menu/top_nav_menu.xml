@@ -14,7 +14,7 @@
         />
     <item
         android:id="@+id/acercadeSanti"
-        android:title="Acerca de Santiago"
+        android:title="About Santiago"
         app:showAsAction="never"
         />
     <item

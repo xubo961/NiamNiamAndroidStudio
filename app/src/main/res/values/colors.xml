@@ -9,4 +9,6 @@
     <color name="colorYellowButtons">#FFF081</color>
     <color name="colorHint">#808080</color>
     <color name="colorPopUpBackgroundSubNivel">#FBF0CE</color>
+    <color name="white">#ffffff</color>
+
 </resources>

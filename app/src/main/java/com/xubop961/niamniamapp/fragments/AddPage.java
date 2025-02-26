@@ -34,7 +34,7 @@ public class AddPage extends Fragment {
     TextView selectIngredientes;
     boolean [] selectedIngredientes;
     ArrayList<Integer> listIngredientes = new ArrayList<>();
-    String [] arrayIngredientes = {"Leche", "Huevo", "Carne", "Agua", "Harina", "Más Ejemplos Jaja"};
+    String [] arrayIngredientes = {"Milk", "Egg", "Beef", "Rice", "Chicken", "Potatoes","Pork","Salmon","Spaghetti","Onion","Sausages","Banana","Avocado"};
 
 
     private static final int REQUEST_IMAGE_PICK = 1;

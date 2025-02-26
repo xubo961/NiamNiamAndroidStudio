@@ -53,7 +53,7 @@
                     android:textColor="@color/colorText"
                     android:textSize="18sp"
                     android:textStyle="bold" />
-
+              
                 <EditText
                     android:id="@+id/textoNombreUsuario"
                     android:layout_width="match_parent"
@@ -76,7 +76,9 @@
                     android:textStyle="bold"
                     android:background="@drawable/rounded_yellow_buttons"
                     android:layout_gravity="center"
-                    android:layout_marginTop="5dp" />
+                    android:layout_marginTop="5dp"
+                    android:textAlignment="center"
+                     />
 
                 <EditText
                     android:id="@+id/textDescripcion"
@@ -97,9 +99,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginTop="16dp">
+            android:text="Your Recipes"
+            android:layout_gravity="center"
+            android:fontFamily="@font/quicksand_light"
+            android:textStyle="bold"
+            android:background="@drawable/rounded_yellow_buttons"
+            android:textAlignment="center"
+            android:textColor="@color/colorText"
+            />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -112,8 +119,6 @@
                 android:textStyle="bold"
                 android:padding="8dp" />
 
-        </LinearLayout>
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
@@ -124,3 +129,4 @@
     </LinearLayout>
 
 </FrameLayout>
+
