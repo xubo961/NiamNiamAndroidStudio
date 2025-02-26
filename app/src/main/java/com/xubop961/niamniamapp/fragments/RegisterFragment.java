@@ -1,6 +1,6 @@
 package com.xubop961.niamniamapp.fragments;
 
-import android.content.Intent;  // Para cambiar de actividad
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,8 +11,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 import com.google.android.material.textfield.TextInputEditText;
+import com.xubop961.niamniamapp.MainActivity;
 import com.xubop961.niamniamapp.R;
-import com.xubop961.niamniamapp.MainActivity; // Importa MainActivity para la redirección
+import com.xubop961.niamniamapp.api.RegisterApi;
+import com.xubop961.niamniamapp.api.ApiClientBackend;
+import com.xubop961.niamniamapp.api.RegisterRequest;
+import com.xubop961.niamniamapp.api.RegisterUser;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegisterFragment extends Fragment {
 
@@ -61,14 +68,32 @@ public class RegisterFragment extends Fragment {
             return;
         }
 
-        // Lógica de registro (aquí puedes guardar los datos en una base de datos o en preferencias)
-        // Si el registro es exitoso, redirigir al usuario a MainActivity
-        Toast.makeText(getContext(), "Registro exitoso", Toast.LENGTH_SHORT).show();
+        // Crear el objeto RegisterRequest con los datos
+        RegisterRequest request = new RegisterRequest(name, email, password);
 
-        // Redirigir a MainActivity
-        Intent intent = new Intent(getActivity(), MainActivity.class);
-        startActivity(intent);
-        getActivity().finish(); // Cerrar RegisterActivity
+        // Obtener la instancia de la API usando Retrofit
+        RegisterApi registerApi = ApiClientBackend.getClient().create(RegisterApi.class);
+
+        // Hacer la petición asíncrona para crear el usuario
+        Call<RegisterUser> call = registerApi.createUser(request);
+        call.enqueue(new Callback<RegisterUser>() {
+            @Override
+            public void onResponse(Call<RegisterUser> call, Response<RegisterUser> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Toast.makeText(getContext(), "Registro exitoso", Toast.LENGTH_SHORT).show();
+                    // Redirigir a MainActivity
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    startActivity(intent);
+                    getActivity().finish();
+                } else {
+                    Toast.makeText(getContext(), "Error en el registro: " + response.message(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RegisterUser> call, Throwable t) {
+                Toast.makeText(getContext(), "Fallo en la conexión: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
-

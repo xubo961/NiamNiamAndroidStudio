@@ -167,7 +167,6 @@ public class HomePage extends Fragment {
         }
     }
 
-    // Calcula la intersección de las listas de recetas usando el ID de cada receta
     private List<Meals.Meal> intersectResults(List<List<Meals.Meal>> results) {
         List<Meals.Meal> intersection = new ArrayList<>();
         if (results == null || results.isEmpty()) {
