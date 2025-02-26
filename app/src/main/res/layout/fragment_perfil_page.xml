@@ -23,7 +23,7 @@
             android:text="PROFILE"
             android:textAlignment="center"
             android:textColor="@color/colorText"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textStyle="bold" />
 
         <androidx.cardview.widget.CardView
@@ -52,15 +52,24 @@
                     android:textAlignment="center"
                     android:textColor="@color/colorText"
                     android:textSize="18sp"
-                    android:textStyle="bold"
-                    />
-
-
+                    android:textStyle="bold" />
+              
+                <EditText
+                    android:id="@+id/textoNombreUsuario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter your username"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/colorPopUpBackgroundSubNivel"
+                    android:inputType="textCapWords"
+                    android:textColorHint="@color/colorHint"
+                    android:fontFamily="@font/quicksand_light"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:text="Description "
+                    android:text="Description"
                     android:textColor="@color/colorText"
                     android:textSize="18sp"
                     android:fontFamily="@font/quicksand_light"
@@ -81,6 +90,7 @@
                     android:textColorHint="@color/colorHint"
                     android:fontFamily="@font/quicksand_light"
                     android:textStyle="bold"
+                    android:gravity="top"
                     android:minLines="4"/>
             </LinearLayout>
 
@@ -98,17 +108,16 @@
             android:textColor="@color/colorText"
             />
 
-
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:background="@drawable/rounded_yellow_buttons"
                 android:fontFamily="@font/quicksand_light"
                 android:text="Your Recipes"
                 android:textAlignment="center"
                 android:textColor="@color/colorText"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:padding="8dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
