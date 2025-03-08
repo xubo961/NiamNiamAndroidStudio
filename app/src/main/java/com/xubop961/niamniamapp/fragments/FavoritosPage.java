@@ -41,7 +41,6 @@ public class FavoritosPage extends Fragment {
         View view = inflater.inflate(R.layout.fragment_favoritos_page, container, false);
 
         recyclerView = view.findViewById(R.id.recycler_view);
-
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
         cargarFavoritos();
@@ -86,10 +85,10 @@ public class FavoritosPage extends Fragment {
 
         textViewInstrucciones.setText(meal.getInstructions());
 
-        // Esta parte es para verificar si la receta ya está en favoritos o no
+        // Verificar si la receta ya está en favoritos
         if (estaEnFavoritos(meal)) {
-            btnAddToFavorites.setVisibility(View.GONE); // Esto es para ocultar el botón de agregar
-            btnRemoveFromFavorites.setVisibility(View.VISIBLE); //Para mostrar el botón de quitar
+            btnAddToFavorites.setVisibility(View.GONE);
+            btnRemoveFromFavorites.setVisibility(View.VISIBLE);
         } else {
             btnAddToFavorites.setVisibility(View.VISIBLE);
             btnRemoveFromFavorites.setVisibility(View.GONE);
@@ -97,21 +96,23 @@ public class FavoritosPage extends Fragment {
 
         btnAddToFavorites.setOnClickListener(v -> {
             guardarEnFavoritos(meal);
-            Toast.makeText(getContext(), "Añadido a Favoritos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Added to Favorites", Toast.LENGTH_SHORT).show();
             btnAddToFavorites.setVisibility(View.GONE);
             btnRemoveFromFavorites.setVisibility(View.VISIBLE);
+            cargarFavoritos(); // Refrescar la lista automáticamente
         });
 
         btnRemoveFromFavorites.setOnClickListener(v -> {
             quitarDeFavoritos(meal);
-            Toast.makeText(getContext(), "Quitado de Favoritos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Removed from Favorites", Toast.LENGTH_SHORT).show();
             btnAddToFavorites.setVisibility(View.VISIBLE);
             btnRemoveFromFavorites.setVisibility(View.GONE);
+            cargarFavoritos(); // Refrescar la lista automáticamente
         });
 
         new MaterialAlertDialogBuilder(getContext())
                 .setView(dialogView)
-                .setPositiveButton("Cerrar", (dialog, which) -> dialog.dismiss())
+                .setPositiveButton("Close", (dialog, which) -> dialog.dismiss())
                 .show();
     }
 
@@ -139,7 +140,7 @@ public class FavoritosPage extends Fragment {
         Type type = new TypeToken<List<Meals.Meal>>() {}.getType();
         List<Meals.Meal> favoritos = gson.fromJson(favoritosJson, type);
 
-        // Para que no se hagan duplicados jeje
+        // Evitar duplicados
         for (Meals.Meal fav : favoritos) {
             if (fav.getMealName().equals(meal.getMealName())) {
                 return;

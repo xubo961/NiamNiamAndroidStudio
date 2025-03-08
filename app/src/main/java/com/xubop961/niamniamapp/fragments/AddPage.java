@@ -62,8 +62,7 @@ public class AddPage extends Fragment {
                         imageViewRecipe.setImageBitmap(bitmap);
                     } catch (Exception e) {
                         e.printStackTrace();
-                        Toast.makeText(getContext(), "Error al cargar la imagen", Toast.LENGTH_SHORT).show();
-                    }
+                        Toast.makeText(getContext(), "Error loading image", Toast.LENGTH_SHORT).show();                    }
                 }
             }
     );
@@ -122,12 +121,10 @@ public class AddPage extends Fragment {
             String imageUriString = (selectedImageUri != null) ? selectedImageUri.toString() : "";
 
             if (name.isEmpty() || instructions.isEmpty()) {
-                Toast.makeText(getContext(), "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
-            } else {
+                Toast.makeText(getContext(), "Please complete all fields", Toast.LENGTH_SHORT).show();            } else {
                 Recipe recipe = new Recipe(name, ingredients, instructions, imageUriString);
                 RecipePreferences.saveRecipe(getContext(), recipe);
-                Toast.makeText(getContext(), "Receta guardada", Toast.LENGTH_SHORT).show();
-                // Opcional: limpiar los campos luego de guardar
+                Toast.makeText(getContext(), "Recipe saved", Toast.LENGTH_SHORT).show();                // Opcional: limpiar los campos luego de guardar
                 editTextRecetaName.setText("");
                 editTextInstrucciones.setText("");
                 selectIngredientes.setText("");
@@ -152,7 +149,7 @@ public class AddPage extends Fragment {
     // Función para mostrar el diálogo de selección de ingredientes
     private void showIngredientesDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Selecciona los ingredientes:")
+        builder.setTitle("Select Ingredients:")
                 .setCancelable(false)
                 .setMultiChoiceItems(arrayIngredientes, selectedIngredientes, (dialog, which, isChecked) -> {
                     if (isChecked) {
@@ -172,7 +169,7 @@ public class AddPage extends Fragment {
                     selectIngredientes.setText(stringBuilder.toString());
                 })
                 .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
-                .setNeutralButton("Quitar", (dialog, which) -> {
+                .setNeutralButton("Remove", (dialog, which) -> {
                     for (int i = 0; i < selectedIngredientes.length; i++) {
                         selectedIngredientes[i] = false;
                     }

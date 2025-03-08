@@ -68,9 +68,13 @@ public class PerfilPage extends Fragment {
         TextView dialogFoodName = dialogView.findViewById(R.id.dialogFoodName);
         TextView dialogFoodInstruction = dialogView.findViewById(R.id.dialogFoodInstruction);
 
-        // Asignamos los datos de la receta
+        // Asignamos el nombre de la receta
         dialogFoodName.setText(recipe.getName());
-        dialogFoodInstruction.setText(recipe.getInstructions());
+
+        // Construimos el mensaje que incluye ingredientes e instrucciones
+        String details = "Ingredients: " + recipe.getIngredients() + "\n\n"
+                + "Instructions: " + recipe.getInstructions();
+        dialogFoodInstruction.setText(details);
 
         // Cargamos la imagen usando Glide, si existe
         if (recipe.getImageUri() != null && !recipe.getImageUri().isEmpty()) {
@@ -84,8 +88,9 @@ public class PerfilPage extends Fragment {
         // Creamos y mostramos el AlertDialog
         new AlertDialog.Builder(getContext())
                 .setView(dialogView)
-                .setPositiveButton("Cerrar", (dialog, which) -> dialog.dismiss())
+                .setPositiveButton("Close", (dialog, which) -> dialog.dismiss())
                 .create()
                 .show();
     }
+
 }

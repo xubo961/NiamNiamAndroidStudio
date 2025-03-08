@@ -11,4 +11,8 @@ public interface ApiInterface {
     // Nueva función para obtener detalles de una receta por su mealId
     @GET("lookup.php")
     Call<Meals> getMealDetails(@Query("i") String mealId);
+
+    @GET("search.php")
+    Call<Meals> getMealsByName(@Query("s") String name);
+
 }
