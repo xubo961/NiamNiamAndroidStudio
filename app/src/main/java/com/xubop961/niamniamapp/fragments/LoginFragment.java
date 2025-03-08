@@ -50,7 +50,7 @@ public class LoginFragment extends Fragment {
         String password = editPassword.getText().toString().trim();
 
         if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(getContext(), "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Please complete all fields", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -60,20 +60,20 @@ public class LoginFragment extends Fragment {
 
         // Comprobar si el usuario existe
         if (!sharedPreferences.contains(key)) {
-            Toast.makeText(getContext(), "Usuario inexistente, regístrate", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "User does not exist, please register", Toast.LENGTH_SHORT).show();
             return;
         }
 
         // Recuperar los datos del usuario; se asume que se guardaron en el formato "nombre;password"
         String userData = sharedPreferences.getString(key, "");
         if (userData.isEmpty()) {
-            Toast.makeText(getContext(), "Datos de usuario no encontrados", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "User data not found", Toast.LENGTH_SHORT).show();
             return;
         }
 
         String[] parts = userData.split(";");
         if (parts.length < 2) {
-            Toast.makeText(getContext(), "Datos de usuario corruptos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Corrupted user data", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -81,22 +81,20 @@ public class LoginFragment extends Fragment {
         String storedPassword = parts[1];
 
         if (storedPassword.equals(password)) {
-            Toast.makeText(getContext(), "Inicio de sesión exitoso. Bienvenido " + storedName, Toast.LENGTH_SHORT).show();
-            Log.d(TAG, "Login exitoso: " + storedName + ", Email: " + email);
+            Toast.makeText(getContext(), "Login successful. Welcome " + storedName, Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "Login successful: " + storedName + ", Email: " + email);
 
             //Metodo para guardar el nombre para poder yusarlo en las otras pantallas
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("logged_in_name", storedName);
             editor.apply();
 
-
-
             // Redirigir a MainActivity
             Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
             getActivity().finish(); // Evita volver al login con el botón de retroceso
         } else {
-            Toast.makeText(getContext(), "Contraseña incorrecta", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Incorrect password", Toast.LENGTH_SHORT).show();
         }
     }
 }

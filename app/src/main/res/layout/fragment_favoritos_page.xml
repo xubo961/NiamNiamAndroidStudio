@@ -23,31 +23,7 @@
             android:textStyle="bold"/>
 
 
-        <LinearLayout
-            android:id="@+id/linearlayoutSearch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:gravity="center"
-            android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/buscarRecetas"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_search_background"
-                android:drawableStart="@drawable/baseline_search_24"
-                android:drawablePadding="10dp"
-                android:fontFamily="@font/quicksand_light"
-                android:hint="Search..."
-                android:paddingStart="40dp"
-                android:textSize="16sp"
-                android:gravity="center_vertical"
-                android:singleLine="true"
-                android:textStyle="bold"/>
-
-        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"

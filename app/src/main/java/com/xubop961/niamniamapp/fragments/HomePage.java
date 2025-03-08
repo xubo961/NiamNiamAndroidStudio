@@ -87,11 +87,16 @@ public class HomePage extends Fragment {
         apiService = retrofit.create(ApiInterface.class);
 
         btnBuscar.setOnClickListener(v -> {
-            String ingrediente = buscarRecetas.getText().toString().trim();
-            if (!ingrediente.isEmpty()) {
-                buscarRecetasPorIngrediente(ingrediente);
+            String query = buscarRecetas.getText().toString().trim();
+            if (!query.isEmpty()) {
+                // Si el query contiene comas, se asume búsqueda por ingredientes, de lo contrario por nombre.
+                if (query.contains(",")) {
+                    buscarRecetasPorIngrediente(query);
+                } else {
+                    buscarRecetasPorNombre(query);
+                }
             } else {
-                Toast.makeText(getContext(), "Por favor, ingrese un ingrediente para buscar", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Please enter an ingredient or recipe name to search", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -113,7 +118,7 @@ public class HomePage extends Fragment {
         }
 
         if (ingredientList.isEmpty()) {
-            Toast.makeText(getContext(), "Por favor, ingrese al menos un ingrediente", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Please enter at least one ingredient", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -160,6 +165,26 @@ public class HomePage extends Fragment {
         }
     }
 
+    // Búsqueda por nombre utilizando el endpoint search.php?s=
+    private void buscarRecetasPorNombre(String nombre) {
+        apiService.getMealsByName(nombre).enqueue(new Callback<Meals>() {
+            @Override
+            public void onResponse(@NonNull Call<Meals> call, @NonNull Response<Meals> response) {
+                if (response.isSuccessful() && response.body() != null && response.body().getMeals() != null) {
+                    List<Meals.Meal> mealsList = response.body().getMeals();
+                    updateRecipesUI(mealsList);
+                } else {
+                    Toast.makeText(getContext(), "No recipes found for the given name", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Meals> call, @NonNull Throwable t) {
+                Toast.makeText(getContext(), "Connection error", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     // Procesa los resultados una vez completadas todas las llamadas y actualiza el RecyclerView
     private void procesarResultados(List<List<Meals.Meal>> results) {
         List<Meals.Meal> intersection = intersectResults(results);
@@ -169,7 +194,7 @@ public class HomePage extends Fragment {
             });
             recyclerView.setAdapter(adapter);
         } else {
-            Toast.makeText(getContext(), "No se encontraron recetas para los ingredientes seleccionados", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "No recipes found for the selected ingredients", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -235,29 +260,29 @@ public class HomePage extends Fragment {
                     if (instrucciones != null && !instrucciones.isEmpty()) {
                         textViewInstrucciones.setText(instrucciones);
                     } else {
-                        textViewInstrucciones.setText("No hay instrucciones disponibles.");
+                        textViewInstrucciones.setText("No instructions available.");
                     }
 
                     // Gestionar visibilidad de los botones de favoritos
                     if (estaEnFavoritos(recipeDetails)) {
-                        btnAddToFavorites.setVisibility(View.GONE);  // Ocultar "Añadir a Favoritos"
-                        btnRemoveFromFavorites.setVisibility(View.VISIBLE);  // Mostrar "Quitar de Favoritos"
+                        btnAddToFavorites.setVisibility(View.GONE);
+                        btnRemoveFromFavorites.setVisibility(View.VISIBLE);
                     } else {
-                        btnAddToFavorites.setVisibility(View.VISIBLE);  // Mostrar "Añadir a Favoritos"
-                        btnRemoveFromFavorites.setVisibility(View.GONE);  // Ocultar "Quitar de Favoritos"
+                        btnAddToFavorites.setVisibility(View.VISIBLE);
+                        btnRemoveFromFavorites.setVisibility(View.GONE);
                     }
 
                     // Gestión de favoritos
                     btnAddToFavorites.setOnClickListener(v -> {
                         guardarEnFavoritos(recipeDetails);
-                        Toast.makeText(getContext(), "Añadido a Favoritos", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Added to Favorites", Toast.LENGTH_SHORT).show();
                         btnAddToFavorites.setVisibility(View.GONE);
                         btnRemoveFromFavorites.setVisibility(View.VISIBLE);
                     });
 
                     btnRemoveFromFavorites.setOnClickListener(v -> {
                         quitarDeFavoritos(recipeDetails);
-                        Toast.makeText(getContext(), "Quitado de Favoritos", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Removed from Favorites", Toast.LENGTH_SHORT).show();
                         btnAddToFavorites.setVisibility(View.VISIBLE);
                         btnRemoveFromFavorites.setVisibility(View.GONE);
                     });
@@ -265,17 +290,17 @@ public class HomePage extends Fragment {
                     // Mostrar el diálogo
                     new MaterialAlertDialogBuilder(getContext())
                             .setView(dialogView)
-                            .setPositiveButton("Cerrar", (dialog, which) -> dialog.dismiss())
+                            .setPositiveButton("Close", (dialog, which) -> dialog.dismiss())
                             .show();
 
                 } else {
-                    Toast.makeText(getContext(), "Error al obtener los detalles de la receta", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Error fetching recipe details", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<Meals> call, @NonNull Throwable t) {
-                Toast.makeText(getContext(), "Error de conexión", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Connection error", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -490,7 +515,7 @@ public class HomePage extends Fragment {
             });
             recyclerView.setAdapter(adapter);
         } else {
-            Toast.makeText(getContext(), "No se encontraron recetas para esta categoría", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "No recipes found for this category", Toast.LENGTH_SHORT).show();
         }
     }
 }

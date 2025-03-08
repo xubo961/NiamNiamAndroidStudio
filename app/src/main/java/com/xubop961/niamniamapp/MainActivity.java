@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.configuracionButton) {
-            Toast toast = Toast.makeText(this, "Botón Configuración", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(this, "coming soon ", Toast.LENGTH_SHORT);
             toast.show();
         } else if (id == R.id.acercadeBo) {
             Intent intent = new Intent(Intent.ACTION_VIEW);

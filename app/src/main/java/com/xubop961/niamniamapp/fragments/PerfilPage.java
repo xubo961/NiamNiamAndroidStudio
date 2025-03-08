@@ -4,79 +4,93 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import androidx.appcompat.app.AlertDialog;
 import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.xubop961.niamniamapp.R;
-import com.xubop961.niamniamapp.adapters.FoodAdapter;
-import com.xubop961.niamniamapp.api.Meals;
-import java.lang.reflect.Type;
+import com.xubop961.niamniamapp.adapters.RecipeAdapter;
+import com.xubop961.niamniamapp.api.Recipe;
+import com.xubop961.niamniamapp.api.RecipePreferences;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PerfilPage extends Fragment {
 
     private RecyclerView recyclerView;
-    private FoodAdapter adapter;
+    private RecipeAdapter adapter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflamos el layout del fragmento
         View view = inflater.inflate(R.layout.fragment_perfil_page, container, false);
 
-        // Recuperamos el TextView de username y le asignamos el nombre del usuario guardado
+        // Recuperamos el TextView del username y le asignamos el nombre del usuario guardado
         TextView textUsername = view.findViewById(R.id.textUsername);
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("niamniam_preferences", Context.MODE_PRIVATE);
         String loggedName = sharedPreferences.getString("logged_in_name", "Username");
         textUsername.setText(loggedName);
 
-        // Aquí podrías inicializar el RecyclerView si lo requieres
-        recyclerView = view.findViewById(R.id.recycler_view); // Asegúrate de tener este id en el XML
-        // Si deseas cargar las recetas favoritas, llama a cargarTusRecetas();
-        // cargarTusRecetas();
+        // Inicializamos el RecyclerView y asignamos un LayoutManager
+        recyclerView = view.findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        // Cargamos las recetas guardadas en SharedPreferences
+        cargarTusRecetas();
 
         return view;
     }
 
     private void cargarTusRecetas() {
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("FAVORITOS", Context.MODE_PRIVATE);
-        Gson gson = new Gson();
-        String favoritosJson = sharedPreferences.getString("favoritos_lista", "[]");
-        Type type = new TypeToken<List<Meals.Meal>>() {}.getType();
-        List<Meals.Meal> favoritos = gson.fromJson(favoritosJson, type);
-
-        if (favoritos == null) {
-            favoritos = new ArrayList<>();
+        List<Recipe> recetas = RecipePreferences.getRecipes(getContext());
+        if (recetas == null) {
+            recetas = new ArrayList<>();
         }
-
-        adapter = new FoodAdapter(getContext(), favoritos, meal -> {
-            mostrarDialogoReceta(meal);
+        adapter = new RecipeAdapter(getContext(), recetas, recipe -> {
+            // Al hacer clic, mostramos el diálogo con los detalles de la receta
+            mostrarDialogoReceta(recipe);
         });
-
         recyclerView.setAdapter(adapter);
     }
 
-    private void mostrarDialogoReceta(Meals.Meal meal) {
+    private void mostrarDialogoReceta(Recipe recipe) {
+        // Inflamos el layout dialog_food_details (sin modificar)
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View dialogView = inflater.inflate(R.layout.dialog_food_details, null);
 
-        ImageView imageView = dialogView.findViewById(R.id.dialogFoodImage);
-        TextView textViewNombre = dialogView.findViewById(R.id.dialogFoodName);
-        TextView textViewInstrucciones = dialogView.findViewById(R.id.dialogFoodInstruction);
+        // Referencias a las vistas del diálogo
+        ImageView dialogFoodImage = dialogView.findViewById(R.id.dialogFoodImage);
+        TextView dialogFoodName = dialogView.findViewById(R.id.dialogFoodName);
+        TextView dialogFoodInstruction = dialogView.findViewById(R.id.dialogFoodInstruction);
 
-        textViewNombre.setText(meal.getMealName());
+        // Asignamos el nombre de la receta
+        dialogFoodName.setText(recipe.getName());
 
-        Glide.with(getContext())
-                .load(meal.getMealImageUrl())
-                .into(imageView);
+        // Construimos el mensaje que incluye ingredientes e instrucciones
+        String details = "Ingredients: " + recipe.getIngredients() + "\n\n"
+                + "Instructions: " + recipe.getInstructions();
+        dialogFoodInstruction.setText(details);
 
-        textViewInstrucciones.setText(meal.getInstructions());
+        // Cargamos la imagen usando Glide, si existe
+        if (recipe.getImageUri() != null && !recipe.getImageUri().isEmpty()) {
+            Glide.with(getContext())
+                    .load(recipe.getImageUri())
+                    .into(dialogFoodImage);
+        } else {
+            dialogFoodImage.setImageResource(R.drawable.coche);
+        }
+
+        // Creamos y mostramos el AlertDialog
+        new AlertDialog.Builder(getContext())
+                .setView(dialogView)
+                .setPositiveButton("Close", (dialog, which) -> dialog.dismiss())
+                .create()
+                .show();
     }
+
 }
